@@ -1,0 +1,18 @@
+
+<div class="card">
+    <div class="card-body">
+       <h3>{{title}}</h3>
+       
+       <div style="display: block">
+        <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+        
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+      <button class="btn btn-primary float-end" (click)="randomize()">Update</button>
+    </div>
+</div>
