@@ -13,18 +13,20 @@
                                 <li><a href="javascript:void()">Mi perfil </a></li>
                                 <li><a href="javascript:void()"></a></li>
                               
-                                <li><a href="javascript:void()">Configuracion de cuenta</a></li>
-                                <li><a href="javascript:void()">Salir</a></li>
+                                <li><a routerLink='/dashboard/account-settings' >Configuracion de cuenta</a></li>
+                                <li><a routerLink="/login">Salir</a></li>
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
-                        <li class="nav-small-cap">Articulos</li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Articulos <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                        <li class="nav-small-cap">MENU DE OPCIONES</li>
+                        <li *ngFor="let item of menuItems"> 
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">{{item.titulo}} 
+                                <span class="label label-rouded label-themecolor pull-right">{{item.submenu.length}}</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="index.html">Baja de producto </a></li>
-                                <li><a href="index2.html">Entrada de producto</a></li>
-                                <li><a href="index3.html">Todos</a></li>
-                                <li><a href="index4.html">Buscar</a></li>
+                                <li *ngFor="let subMenuItem of item.submenu">
+                                    <a [routerLink]="subMenuItem.url">{{subMenuItem.titulo}} </a>
+                                </li>
+                              
                             </ul>
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Proyectos</span></a>

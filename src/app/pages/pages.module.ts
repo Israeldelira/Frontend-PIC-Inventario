@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { ComponentsModule } from '../components/components.module';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 
 
@@ -23,6 +24,7 @@ import { ComponentsModule } from '../components/components.module';
     ProyectosComponent,
     PagesComponent,
     Grafica1Component,
+    AccountSettingsComponent,
   ],
   exports:[
     DashboardComponent,
@@ -35,7 +37,6 @@ import { ComponentsModule } from '../components/components.module';
     CommonModule,
     SharedModule,
     RouterModule,
-    
     ComponentsModule
   ]
 })

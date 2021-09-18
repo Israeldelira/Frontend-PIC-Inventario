@@ -1043,13 +1043,15 @@ File: scss
       .topbar .top-navbar .navbar-header .navbar-brand {
         margin-right: 0px;
         padding-bottom: 0px;
-        padding-top: 0px; }
+        padding-top: 0px;
+        }
         .topbar .top-navbar .navbar-header .navbar-brand .light-logo {
           display: none; 
-          color: white;
+          color: rgb(255, 255, 255);
           position: relative;
-          font-weight: bold; 
-          left: .5em;
+          font-weight: bold;
+          left: .5em;  
+          
           
         }
         .topbar .top-navbar .navbar-header .navbar-brand b {
@@ -1161,7 +1163,7 @@ File: scss
   -ms-flex-negative: 0;
   flex-shrink: 0;
   padding-left: 0px;
-  background:#32506d; }
+  background:#242a33}
  
   
 
@@ -5738,7 +5740,8 @@ File: scss
     -webkit-flex-shrink: 0;
     -ms-flex-negative: 0;
     flex-shrink: 0; 
-    background:#32506d;
+    background:#242a33;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
     
     .navbar-header .navbar-brand {

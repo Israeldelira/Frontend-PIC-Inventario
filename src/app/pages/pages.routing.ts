@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
@@ -10,9 +11,12 @@ const routes: Routes = [
     {
         path: 'dashboard', component: PagesComponent,
         children: [
+            {path:'',component:DashboardComponent},
             { path: 'articulos', component: ArticulosComponent },
             { path: 'proyectos', component: ProyectosComponent },
-            { path: 'grafica', component: Grafica1Component},
+            { path: 'graficas', component: Grafica1Component},
+            { path: 'account-settings', component: AccountSettingsComponent},
+
 
            
         ]

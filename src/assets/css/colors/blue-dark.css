@@ -21,7 +21,8 @@ File: scss
 .topbar {
   background: #1e88e5; }
   .topbar .top-navbar .navbar-header .navbar-brand .dark-logo {
-    display: none; }
+    display: none;
+   }
   .topbar .top-navbar .navbar-header .navbar-brand .light-logo {
     display: inline-block;
     color: rgba(255, 255, 255, 0.8); }
