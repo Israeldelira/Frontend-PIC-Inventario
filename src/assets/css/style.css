@@ -1050,7 +1050,7 @@ File: scss
           color: rgb(255, 255, 255);
           position: relative;
           font-weight: bold;
-          left: .5em;  
+          
           
           
         }
@@ -2752,7 +2752,7 @@ Form Material page
   padding-left: 0px;
   border-bottom: 1px solid #f6f9ff; }
   .form-control-line .form-control:focus {
-    border-bottom: 1px solid #398bf7; }
+    border-bottom: 1px solid #000000; }
 
 /*******************
 Form validation error 
@@ -5898,3 +5898,12 @@ File: scss
     text-align: center;
     margin-top: 10px;
     overflow: hidden; } }
+
+    .form-control{
+      color:black
+    }
+    .form-control::placeholder{
+      color:#707070
+    }
+  
+     

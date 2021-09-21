@@ -24,7 +24,11 @@ File: scss
     display: none; }
   .topbar .top-navbar .navbar-header .navbar-brand .light-logo {
     display: inline-block;
-    color: rgba(255, 255, 255, 0.8); }
+    color: rgb(255, 255, 255);
+    left: initial;
+     
+    
+  }
   .topbar .navbar-nav .nav-item > a.nav-link {
     color: rgba(255, 255, 255, 0.8); }
     .topbar .navbar-nav .nav-item > a.nav-link:hover, .topbar .navbar-nav .nav-item > a.nav-link:focus {

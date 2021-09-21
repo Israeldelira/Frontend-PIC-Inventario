@@ -8,19 +8,19 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="user-profile">
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="../assets/images/users/profile.png" alt="user" /><span class="hide-menu">Nombre</span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Nombre</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="javascript:void()">Mi perfil </a></li>
                                 <li><a href="javascript:void()"></a></li>
                               
                                 <li><a routerLink='/dashboard/account-settings' >Configuracion de cuenta</a></li>
-                                <li><a routerLink="/login">Salir</a></li>
+                                <li><a routerLink="/login">Cerrar sesion</a></li>
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">MENU DE OPCIONES</li>
                         <li *ngFor="let item of menuItems"> 
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">{{item.titulo}} 
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class={{item.icono}}></i><span class="hide-menu">{{item.titulo}} 
                                 <span class="label label-rouded label-themecolor pull-right">{{item.submenu.length}}</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li *ngFor="let subMenuItem of item.submenu">
@@ -29,16 +29,16 @@
                               
                             </ul>
                         </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Proyectos</span></a>
+                        <!-- <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Proyectos</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="app-calendar.html">Todos</a></li>
                                 <li><a href="app-chat.html">Completados</a></li>
                                 <li><a href="app-ticket.html">En proceso</a></li>
                               
                             </ul>
-                        </li>
+                        </li> -->
                      
-                     
+<!--                      
                         <li class="nav-small-cap">FORMS, TABLE &amp; WIDGETS</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Forms</span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -49,7 +49,7 @@
                                
                             </ul>
                         </li>
-                       
+                        -->
                        
                         
                 

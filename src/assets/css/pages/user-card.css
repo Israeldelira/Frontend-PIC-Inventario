@@ -1,23 +1,4 @@
-/*
-Template Name: Admin pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: scss
-*/
-/*
-Template Name: Admin Pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: scss
-*/
-/*Theme Colors*/
-/*bootstrap Color*/
-/*Light colors*/
-/*Normal Color*/
-/*Extra Variable*/
-/*******************
-User card page
-******************/
+login-box card
 .el-element-overlay .white-box {
   padding: 0px; }
 
@@ -81,7 +62,7 @@ User card page
           color: #ffffff;
           padding: 12px 15px 10px; }
           .el-element-overlay .el-card-item .el-overlay-1 .el-info > li a:hover {
-            background: #398bf7;
+            background: #be1159;
             border-color: #398bf7; }
   .el-element-overlay .el-card-item .el-overlay {
     width: 100%;

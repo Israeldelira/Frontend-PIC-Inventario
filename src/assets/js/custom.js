@@ -1,6 +1,6 @@
 
 
-const customInitFunctions = () => {
+ const customInitFunctions = () => {
 $(function() {
     "use strict";
     $(function() {
@@ -153,4 +153,4 @@ $(function() {
 
 });
 }
-customInitFunctions();
+ customInitFunctions();

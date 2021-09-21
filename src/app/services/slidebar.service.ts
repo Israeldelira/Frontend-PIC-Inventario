@@ -19,11 +19,21 @@ export class SlidebarService {
     {
 
       titulo: 'Articulos',
-      icono: 'mdi mdi-gauge',
+      icono: 'mdi mdi-cards',
       submenu: [
         { titulo: 'Todos los articulos', url: '/dashboard/articulos' },
         { titulo: 'Entradas', url: '/' },
         { titulo: 'Salidas', url: '/' }
+      ]
+    },
+    {
+
+      titulo: 'Proyectos',
+      icono: 'mdi mdi-briefcase',
+      submenu: [
+        { titulo: 'Todos los proyectos', url: '/dashboard/proyectos' },
+        { titulo: 'En proceso', url: '/' },
+        { titulo: 'Terminados', url: '/' }
       ]
     }
   ]
