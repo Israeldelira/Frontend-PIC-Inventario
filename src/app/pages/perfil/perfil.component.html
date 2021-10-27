@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Mi perfil</h4>
+                <h5 class="card-subtitle">Configurar cuenta</h5>
+                <form class="form p-t-20"
+                [formGroup]="perfilForm"
+                (submit)="actualizarPerfil()">
+                    <div class="form-group">
+                        <label for="exampleInputuname"> Nombre</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input type="text" class="form-control" id="exampleInputuname"
+                                placeholder="Nombre y apellido"
+                                formControlName="nombre">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputuname"> Usuario</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input type="text" class="form-control" id="exampleInputuname" placeholder="Usuario"
+                            formControlName="user">
+                        </div>
+                    </div>
+                  
+                    <button type="submit" class="btn  btn-md btn-success waves-effect waves-light m-r-10"[disabled]="perfilForm.invalid" >Guardar
+                        cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Configurar imagen</h4>
+                <h5 class="card-subtitle">Cargar imagen</h5>
+                <img *ngIf="!imgTemp" [src]="usuario.imgUrl" class="perfilImagen">
+                 <img *ngIf="imgTemp"  [src]="imgTemp" class="perfilImagen">
+                <div class="form-group">
+                    <br>
+                    <label for="exampleInputuname">Seleccionar nueva imagen</label>
+                   <br>
+                   <input type="file" accept=".png, .jpg, .jpeg" (change)="cambiarImagen($event)" id="exampleInputuname">
+                      
+                </div>
+                
+                <button type="button" class="btn btn-success btn-block waves-effect waves-light m-r-10" [disabled]="!imagenSubir" (click)="subirImagen()">
+                    <i class="fa fa-save"></i>
+                    Cambiar imagen
+                </button>
+                     </div>
+        </div>
+    </div>
+
+</div>

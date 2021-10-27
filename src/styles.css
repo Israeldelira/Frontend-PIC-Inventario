@@ -10,3 +10,9 @@
 swal2-styled.swal2-confirm.swalBtnColor {
     color: #00ff88
   }
+  .perfilImagen{
+      justify-content: center;
+      width: 200px;
+      height: 200px;
+      margin: auto; display: block; 
+  }

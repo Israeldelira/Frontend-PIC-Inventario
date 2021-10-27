@@ -48,6 +48,7 @@ public formSubmitted=false
        this.router.navigateByUrl('/');
      }else{
        localStorage.removeItem('user');
+       this.router.navigateByUrl('/');
      }
     },
       (err)=>{

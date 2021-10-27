@@ -13,6 +13,8 @@ import { RouterModule } from '@angular/router';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { ComponentsModule } from '../components/components.module';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -25,6 +27,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     PagesComponent,
     Grafica1Component,
     AccountSettingsComponent,
+    PerfilComponent,
   ],
   exports:[
     DashboardComponent,
@@ -37,7 +40,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     CommonModule,
     SharedModule,
     RouterModule,
-    ComponentsModule
+    ComponentsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }

@@ -6,6 +6,7 @@ import { ArticulosComponent } from './articulos/articulos.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { PagesComponent } from './pages.component';
+import { PerfilComponent } from './perfil/perfil.component';
 import { ProyectosComponent } from './proyectos/proyectos.component';
 
 const routes: Routes = [
@@ -14,11 +15,12 @@ const routes: Routes = [
         component: PagesComponent,
         canActivate:[AuthGuard],
         children: [
-            {path:'',component:DashboardComponent},
-            { path: 'articulos', component: ArticulosComponent },
-            { path: 'proyectos', component: ProyectosComponent },
-            { path: 'graficas', component: Grafica1Component},
-            { path: 'account-settings', component: AccountSettingsComponent},
+            {path:'',component:DashboardComponent,data:{titulo:'Dashboard'}},
+            { path: 'articulos', component: ArticulosComponent,data:{titulo:'Articulos'} },
+            { path: 'proyectos', component: ProyectosComponent ,data:{titulo:'Proyectos'} },
+            { path: 'graficas', component: Grafica1Component ,data:{titulo:'Graficas'} },
+            { path: 'account-settings', component: AccountSettingsComponent,data:{titulo:'Configuracion de cuenta'} },
+            { path: 'perfil', component: PerfilComponent,data:{titulo:'Perfil'} },
 
 
            
