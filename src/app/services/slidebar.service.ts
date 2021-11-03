@@ -35,6 +35,16 @@ export class SlidebarService {
         { titulo: 'En proceso', url: '/' },
         { titulo: 'Terminados', url: '/' }
       ]
+    },
+    {
+
+      titulo: 'Mantenimientos',
+      icono: 'mdi mdi-folder-lock-open',
+      submenu: [
+        { titulo: 'Usuarios', url: '/dashboard/usuarios' },
+        { titulo: 'Articulos', url: '/articulos' },
+        { titulo: 'Proyectos', url: '/' }
+      ]
     }
   ]
   constructor() { }

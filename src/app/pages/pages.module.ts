@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { ProyectosComponent } from './proyectos/proyectos.component';
-
+import { FormsModule } from '@angular/forms';
 import { PagesComponent } from './pages.component';
 import { RouterModule } from '@angular/router';
 
@@ -15,6 +15,7 @@ import { ComponentsModule } from '../components/components.module';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
 
 
@@ -28,6 +29,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     Grafica1Component,
     AccountSettingsComponent,
     PerfilComponent,
+    UsuariosComponent,
+  
   ],
   exports:[
     DashboardComponent,
@@ -41,7 +44,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     RouterModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class PagesModule { }
