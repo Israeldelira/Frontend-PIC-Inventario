@@ -22,8 +22,18 @@ export class SlidebarService {
       icono: 'mdi mdi-cards',
       submenu: [
         { titulo: 'Todos los articulos', url: '/dashboard/articulos' },
-        { titulo: 'Entradas', url: '/' },
-        { titulo: 'Salidas', url: '/' }
+        { titulo: 'Agregar articulo', url: '/dashboard/articulo/nuevo' },
+     
+      ]
+    },
+    {
+
+      titulo: 'Provedores',
+      icono: 'mdi mdi-book-open',
+      submenu: [
+        { titulo: 'Todos los provedores', url: '/dashboard/provedores'},
+        { titulo: 'Agregar provedor', url: '/dashboard/provedor/nuevo'},
+
       ]
     },
     {
@@ -32,8 +42,8 @@ export class SlidebarService {
       icono: 'mdi mdi-briefcase',
       submenu: [
         { titulo: 'Todos los proyectos', url: '/dashboard/proyectos' },
-        { titulo: 'En proceso', url: '/' },
-        { titulo: 'Terminados', url: '/' }
+        { titulo: 'Registrar proyecto', url: '/dashboard/proyecto/nuevo' },
+  
       ]
     },
     {
@@ -42,8 +52,18 @@ export class SlidebarService {
       icono: 'mdi mdi-folder-lock-open',
       submenu: [
         { titulo: 'Usuarios', url: '/dashboard/usuarios' },
-        { titulo: 'Articulos', url: '/articulos' },
-        { titulo: 'Proyectos', url: '/' }
+        { titulo: 'Categorias', url: '/dashboard/categorias' },
+      ]
+    },
+    {
+
+      titulo: 'Almacen',
+      icono: 'mdi mdi-archive',
+      submenu: [
+        { titulo: 'Informacion de almacen', url: '/dashboard/movimientos' },
+        { titulo: 'Entradas', url: '/dashboard/entradas/vacio' },
+        { titulo: 'Salidas', url: '/dashboard/salidas/vacio' },
+     
       ]
     }
   ]

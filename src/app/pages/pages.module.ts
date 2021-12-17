@@ -16,11 +16,22 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PerfilComponent } from './perfil/perfil.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { CategoriasComponent } from './mantenimientos/categorias/categorias.component';
+import { ProvedoresComponent } from './provedores/provedores.component';
+import { ProvedorComponent } from './provedores/provedor.component';
+import { ArticuloComponent } from './articulos/articulo.component';
+import { ProyectoComponent } from './proyectos/proyecto.component';
+import { EntradasComponent } from './almacen/entradas/entradas.component';
+import { SalidasComponent } from './almacen/salidas/salidas.component';
+import { MovimientosComponent } from './almacen/movimientos/movimientos.component';
+
 
 
 
 
 @NgModule({
+  
   declarations: [
     DashboardComponent,
     ArticulosComponent,
@@ -30,6 +41,15 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
     AccountSettingsComponent,
     PerfilComponent,
     UsuariosComponent,
+    CategoriasComponent,
+    ProvedoresComponent,
+    ProvedorComponent,
+    ArticuloComponent,
+    ProyectoComponent,
+    EntradasComponent,
+    SalidasComponent,
+    MovimientosComponent
+ 
   
   ],
   exports:[
@@ -40,6 +60,8 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
     PagesComponent,
   ],
   imports: [
+    
+    BrowserModule,
     CommonModule,
     SharedModule,
     RouterModule,

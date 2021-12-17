@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { CargarUsuario } from '../interfaces/cargar-usuarios.interface';
 import { LoginForm } from '../interfaces/login-form-interface';
 import { RegisterForm } from '../interfaces/register-form-interface';
-import { Usuario } from '../models/usuario.model';
+import { allUsuarios, Usuario } from '../models/usuario.model';
 
 const base_url=environment.base_url;
 
@@ -122,4 +122,18 @@ data={
     return this.http.put(`${base_url}/usuarios/edit-user/${usuario._id}`,usuario,this.headers)
 
   }
+  obtenerTodosUsuarios() {
+    return this.http.get<allUsuarios>(`${ base_url }/usuarios/get-usersAll`,this.headers)
+    .pipe(
+      map(resp=>{
+        console.log(resp.users)
+        const usuarios=resp.users
+        console.log("servicio"+usuarios)
+        return {
+          usuarios
+        }
+      })
+    );
+  }
+
 }

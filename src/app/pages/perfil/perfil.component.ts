@@ -91,32 +91,48 @@ public usuario!: Usuario
       })
     })
   }
-  cambiarImagen(evt:any):any {
-
-    if(evt?.target?.files[0]){
-      this.imagenSubir = evt?.target?.files[0];
-  
-      if (!evt) {
-        return this.imgTemp = null;
-      }
+  cambiarImagen(event){
+    if(!event.target.files[0]){
+      this.imagenSubir = null;
+      return this.imgTemp = null;
+    } else {
+      const file = event.target.files[0];
+      this.imagenSubir = file;
+ 
       const reader = new FileReader();
-      reader.readAsDataURL(this.imagenSubir);
-  
+      reader.readAsDataURL(file);
+ 
       reader.onloadend = () => {
-        this.imgTemp = reader.result;
+         this.imgTemp = reader.result;
       }
     }
   }
+  // cambiarImagen(evt:any):any {
+
+  //   if(evt?.target?.files[0]){
+  //     this.imagenSubir = evt?.target?.files[0];
+  
+  //     if (!evt) {
+  //       return this.imgTemp = null;
+  //     }
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(this.imagenSubir);
+  
+  //     reader.onloadend = () => {
+  //       this.imgTemp = reader.result;
+  //     }
+  //   }
+  // }
  
   subirImagen() {
  
     this.fileUploadService
       .actualizarFoto( this.imagenSubir, 'users', this.usuario._id || '' )
-      .then( img => {
-        this.usuario.img = img;
+      .then( image => {
+        this.usuario.img = image;
         Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
-      },).catch( err => {
-        console.log("no muestra ningun error"+err);
+      }).catch( error => {
+        console.log("no muestra ningun error"+error);
      
         Swal.fire('Error', 'No se pudo subir la imagen', 'error');
       })

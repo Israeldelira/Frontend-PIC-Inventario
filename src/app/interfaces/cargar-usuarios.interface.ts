@@ -4,3 +4,7 @@ export interface CargarUsuario{
     total:number;
     usuarios:Usuario[];
 }
+export interface allUsuarios{
+   
+    users:Usuario[];
+}

@@ -2,8 +2,8 @@
     <div class="col-12">
         <div class="card">
 <div class="card-body">
-    <input type="text" class="form-control" placeholder="Buscar proyecto"
-  
+    <input type="text" class="form-control" placeholder="Buscar provedor"
+    (keyup)="buscar(termino.value)"
     #termino />
 </div>
         </div>
@@ -29,16 +29,16 @@
 
                 <div class="row">
                     <div class="col-8">
-                        <h4 class="card-title">Total de proyectos: ({{proyectos.length}}) </h4>
+                        <h4 class="card-title">Total de provedores ({{provedores.length}})</h4>
                         <h6 class="card-subtitle">
-                         Proyectos de  PIC SOLUTIONS
+                         Provedores de PIC SOLUTIONS
                         </h6>
                     </div>
                     <div class="col">
                         <div class="text-right">
-                            <button [routerLink]="['/dashboard/proyecto','nuevo']" class="btn btn-themecolor">
+                            <button [routerLink]="['/dashboard/provedor','nuevo']" class="btn btn-themecolor">
                                 <i class="fa fa-plus-circle"></i>
-                                Agregar proyecto
+                                Agregar provedor
                             </button>
                         </div>
                     </div>
@@ -49,46 +49,30 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Cliente</th>
-                                <th>Encargado</th>
-                                <th>Completado</th>
-                                <th>Cantidad de bajas</th>
+                                <th>Telefono</th>
+                                <th>Registro</th>
+                                <th>Direccion</th>
                                 <th class="w100">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let proyecto of proyectos" >
-                              
-                            <td class="" >
-                                 {{proyecto.name}}
-                          </td>
+                            <tr *ngFor="let provedor of provedores">
+                                <td class="w180" >
+                                    {{provedor.name}}</td>
+                            <td class="w180" >{{provedor.phone}}</td>
                                      
                                     <td class="w100-c">
-                                        {{proyecto.client}}
-                                      </td>
+                                        {{provedor.registerUser?.user}}</td>
 
                                         <td class="text-nowrap w100">
-                                            {{proyecto.manager}} 
-                                        </td>
-                                        <td class="text-nowrap">
-                                            <span *ngIf="proyecto.complete" class="label label-success">Completado</span>
-                                            <span *ngIf="!proyecto.complete" class="label label-inverse">No completado</span>
-                                           
-                                        </td>
-                                        <td class="text-nowrap w100">
-                                            {{proyecto.outputs?.name}} 
+                                            {{provedor.address}}
                                         </td>
                                 <td class="text-nowrap w100">
-                                   
-                                    <a (click)="completarProyecto(proyecto)"  class="cursor" data-toggle="tooltip" data-original-title="Finalizar proyecto"> 
-                                        <i class="mdi mdi-briefcase-check  text-info"></i> </a>
-                                        &nbsp;
-                                        &nbsp;
-                                    <a  [routerLink]="['/dashboard/proyecto',proyecto._id]"  class="cursor" data-toggle="tooltip" data-original-title="Editar"> 
+                                    <a  [routerLink]="['/dashboard/provedor',provedor._id]" class="cursor" data-toggle="tooltip" data-original-title="Editar"> 
                                         <i class="fa fa-pencil  text-info"></i> </a>
                                         &nbsp;
                                         &nbsp;
-                                    <a  (click)="eliminarProyecto(proyecto);" class="cursor" data-toggle="tooltip" data-original-title="Borrar"> 
+                                    <a (click)="eliminarProvedor(provedor);" class="cursor" data-toggle="tooltip" data-original-title="Borrar"> 
                                         <i class="fa fa-trash text-danger"></i> </a>
                                 </td>
                             </tr>

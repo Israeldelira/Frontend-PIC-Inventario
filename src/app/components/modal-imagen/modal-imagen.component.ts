@@ -53,7 +53,7 @@ subirImagen() {
       Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
       this.modalImagenService.nuevaImagen.emit(img);
       this.cerrarModal();
-    },).catch( err => {
+    }).catch( err => {
       console.log("no muestra ningun error"+err);
    
       Swal.fire('Error', 'No se pudo subir la imagen', 'error');

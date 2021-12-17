@@ -27,8 +27,15 @@ swal2-styled.swal2-confirm.swalBtnColor {
     width: 100px; 
     text-align: center;
   }
+  .w100-c{
+    width: 80px; 
+
+  }
   .w140{
     width: 150px; 
+  }
+  .w180{
+    width: 180px; 
   }
   .avatar{
       width: 45px;
@@ -36,6 +43,12 @@ swal2-styled.swal2-confirm.swalBtnColor {
       border: .5px gainsboro solid;
 
   }
+  .imgArticulo{
+    width: 180px;
+    
+    border: .5px gainsboro solid;
+
+}
   .fondo-modal-imagen{
     background-color: rgba(0, 0, 0, 0.4);
     left: 0px;
