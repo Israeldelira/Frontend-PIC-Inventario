@@ -72,14 +72,16 @@ export class ProvedorComponent implements OnInit {
         Swal.fire({
 
           icon: 'success',
-          title: 'El provedor se registro correctamente',
+          title: 'Registrado',
+          text:'El provedor se registro de manera correcta',
           confirmButtonColor: '#3085d6',
           timer: 3500,
           confirmButtonText: 'Ok'
         })
+        
       }, (err) => {
         Swal.fire({
-          title: 'Ocurrio un error',
+          title: 'Error',
           text: err.error.msg,
           icon: 'error',
           confirmButtonColor: '#3085d6',
@@ -142,8 +144,9 @@ console.log(this.provedoresForm.value!)
       .subscribe(resp => {
         this.cargarProvedor(this.proveedor?.provider._id)
         Swal.fire('Actualizado', `${name} actualizado correctamente`, 'success');
-
-      },(err)=>{
+        this. provedoresForm.reset();
+      }
+      ,(err)=>{
     console.log(err);
     Swal.fire({
       title: 'Ocurrio un error',

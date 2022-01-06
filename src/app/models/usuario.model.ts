@@ -11,12 +11,13 @@ export class Usuario{
    
     constructor(
         public _id:string,
-       public role:string,
       public  nombre:string,
        public user:string,
        public password:string,
+       public role?:'ADMIN' | 'USER',
        public img?:string | any,
        public status?:Boolean,
+       public activate?:Boolean,
     
     ){}
     get imgUrl(){

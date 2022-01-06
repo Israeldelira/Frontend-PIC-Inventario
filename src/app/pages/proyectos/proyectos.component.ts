@@ -29,7 +29,9 @@ cargarProyectos(){
   .subscribe(({total,proyectos})=>{
   this.cargando=false;
    this.proyectos=proyectos
+   this.proyectosTemp = proyectos;
    this.totalProyectos=total
+   console.log(proyectos)
   })
 }
 cambiarPagina(valor: number) {
@@ -46,8 +48,8 @@ eliminarProyecto(proyecto:Proyecto){
 
   this.cargarProyectos();
   Swal.fire({
-    title: '¿Deseas eliminar el proyecto seleccionado?',
-    text: `Eliminar el proyecto: ${proyecto.name} `,
+    title: '¿Eliminar proyecto',
+    text: `¿Estas seguro de eliminar el proyecto: ${proyecto.name}?`,
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#d33',
@@ -88,8 +90,8 @@ completarProyecto(proyecto:Proyecto){
 
   this.cargarProyectos();
   Swal.fire({
-    title: '¿Deseas dar por terminado el proyecto?',
-    text: `Si quiero finalizar el proyecto: ${proyecto.name}  `,
+    title: 'Finalizar proyecto',
+    text: `¿Confirma la finalizacion de el proyecto: ${proyecto.name}  `,
     icon: 'question',
     showCancelButton: true,
     confirmButtonColor: '#d33',
@@ -122,7 +124,7 @@ const data={
         },(err)=>{
           console.log(err);
           Swal.fire({
-            title: 'Ocurrio un error',
+            title: 'Error',
             text: err.error.msg,
             icon: 'error',
             confirmButtonColor: '#3085d6',
@@ -144,5 +146,16 @@ const data={
 // //   })
 // // })
 // }
+buscar(termino: string) {
 
+  if (termino.length === 0) {
+
+    return  this.proyectos = this.proyectosTemp;
+  }
+  this.busquedaService.buscar('projects', termino)
+    .subscribe(resp => {
+      this.proyectos = resp;
+
+    });
+}
 }

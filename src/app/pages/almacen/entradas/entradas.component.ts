@@ -48,12 +48,21 @@ export class EntradasComponent implements OnInit {
       this.cargarArticulo(id);
     })
       this.entradaForm = this.fb.group({
-        article: ['', Validators.required],
+        
+        article: ['', [Validators.required]],
        
-        quantity: ['', Validators.required],
+        quantity: ['', [Validators.required]],
     
       })
     this.cargarEntradas()
+  }
+  campoNoValido(campo: string): boolean {
+    if (this.entradaForm.get(campo)!.invalid && this.formSubmitted) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
   registrarEntrada() {
     this.formSubmitted = true;
@@ -62,13 +71,15 @@ export class EntradasComponent implements OnInit {
       return;
 
     }
+    
     this.almacenServices.registrarEntrada(this.entradaForm.value)
       .subscribe(resp => {
         console.log(resp)
         Swal.fire({
 
           icon: 'success',
-          title: `Se a registrado la entrada de   `,
+          title: `Registro exitoso`,
+          text:  'Material agregado al almacen de manera correcta',
           confirmButtonColor: '#3085d6',
           timer: 3500,
           confirmButtonText: 'Ok'
@@ -76,7 +87,7 @@ export class EntradasComponent implements OnInit {
         this.router.navigate(['/dashboard/entradas/vacio'])
       }, (err) => {
         Swal.fire({
-          title: 'Ocurrio un error',
+          title: 'Error',
           text: err.error.msg,
           icon: 'error',
           confirmButtonColor: '#3085d6',
@@ -122,7 +133,7 @@ export class EntradasComponent implements OnInit {
 
       return this.cargarEntradas();
     }
-    this.busquedaServices.buscar('entradas', termino)
+    this.busquedaServices.buscar('inputs', termino)
       .subscribe(resp => {
 
 

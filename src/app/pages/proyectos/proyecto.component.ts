@@ -47,7 +47,7 @@ export class ProyectoComponent implements OnInit {
     name: ['', Validators.required],
     client: ['',Validators.required],
     manager: ['', Validators.required],
-    complete: [''],
+    complete: ['false'],
 
   })
 } 
@@ -81,17 +81,20 @@ cargarUsuarios(){
       return;
 
     }
+    const {name, client, manager,complete } = this.proyectosForm.value!
     this.proyectosServices.crearProyecto(this.proyectosForm.value)
       .subscribe(resp => {
         console.log(resp)
         Swal.fire({
 
           icon: 'success',
-          title: 'El proyecto se registro correctamente',
+          title: 'Registrado',
+          text: `Se registro el proyecto: ${name} correctamente`,
           confirmButtonColor: '#3085d6',
           timer: 3500,
           confirmButtonText: 'Ok'
         })
+                this. proyectosForm.reset();
       }, (err) => {
         Swal.fire({
           title: 'Ocurrio un error',
@@ -118,7 +121,7 @@ cargarUsuarios(){
   }
 
   buscar(termino: string) {
-
+console.log(termino)
     if (termino.length === 0) {
 
       return this.cargarProyectos();
@@ -150,7 +153,7 @@ cargarUsuarios(){
           .subscribe(resp => {
             this.cargarProyecto(this.proyecto?.project._id)
             Swal.fire('Actualizado', `Proyecto: ${name} actualizado correctamente`, 'success');
-    
+            this. proyectosForm.reset();
           },(err)=>{
         console.log(err);
         Swal.fire({

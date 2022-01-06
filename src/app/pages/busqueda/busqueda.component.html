@@ -1,0 +1,238 @@
+<div class="row animated fadeInDown">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Articulos</h4>
+                <div class="alert alert-info" *ngIf="articulos.length === 0">
+                    <p class="mb-0">
+                        No se encontro ningun articulo con ese termino
+
+                    </p>
+                </div>
+
+                <div class="table-responsive " *ngIf="articulos.length > 0">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Modelo</th>
+                                <th>Cantidad</th>
+                                <th>Marca</th>
+                                <th class="text-nowrap">Acciones</th>
+                            </tr>
+                            
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let articulo of articulos">
+                                <td>
+                                    {{articulo.name}}
+                                </td>
+                                <td>
+                                    {{articulo.model}}
+                                </td>
+                                <td>
+                                    {{articulo.trademark}}
+                                </td>
+                                <td>
+                                    {{articulo.quantity}}
+                                </td>
+
+                                <td>
+                                    <a [routerLink]="['/dashboard/articulo',articulo._id]" data-toggle="tooltip" data-original-title="Ver mas"> <i
+                                            class="mdi mdi-eye text-info m-r-10"></i> </a>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row fadeInDown">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Usuarios</h4>
+                <div class="alert alert-info" *ngIf="usuarios.length === 0">
+                    <p class="mb-0">
+                        No se encontro ningun usuario con ese termino
+                    </p>
+                </div>
+                <div class="table-responsive" *ngIf="usuarios.length > 0">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Usuario</th>
+                                <th>Rol</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let usuario of usuarios">
+                            <tr>
+                                <td>
+                                    {{usuario.nombre}}
+                                </td>
+                                <td>
+                                    {{usuario.user}}
+                                </td>
+
+                                <td class="text-nowrap">
+                                    <span *ngIf="usuario.role == 'ADMIN'" class="label label-megna">Admin</span>
+                                    <span *ngIf="usuario.role =='USER'" class="label label-inverse">User</span>
+                                </td>
+            
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Categorias</h4>
+                <div class="alert alert-info" *ngIf="categorias.length === 0">
+                    <p class="mb-0">
+                        No se encontro ninguna categoria con ese termino
+                    </p>
+                </div>
+                <div class="table-responsive" *ngIf="categorias.length > 0">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Registro</th>
+                                <th>Fecha</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let categoria of categorias">
+                            <tr>
+                                <td>
+                                    {{categoria.name}}
+                                </td>
+                                <td>
+                                    {{categoria.registerUser?.user}}
+                                </td>
+
+                               
+                                    <td class="text-nowrap w100">
+                                        {{ formattedDate(categoria.created_at) }}
+                                    </td>
+                           
+                                
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Provedores</h4>
+                <div class="alert alert-info" *ngIf="provedores.length === 0">
+                    <p class="mb-0">
+                        No se encontro ningun provedor con ese termino
+                    </p>
+                </div>
+                <div class="table-responsive" *ngIf="provedores.length > 0">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Registro</th>
+                                <th>Fecha</th>
+                                <th class="text-nowrap">Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let provedor of provedores">
+                            <tr>
+                                <td>
+                                    {{provedor.name}}
+                                </td>
+                                <td>
+                                    {{provedor.registerUser?.name}}
+                                </td>
+
+                               
+                                    <td class="text-nowrap w100">
+                                        {{ formattedDate(provedor.created_at) }}
+                                    </td>
+                           
+                                <td>
+                                    <a [routerLink]="['/dashboard/provedor',provedor._id]" data-toggle="tooltip" data-original-title="Edit"> <i
+                                            class="mdi mdi-eye text-info m-r-10"></i> </a>
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Proyectos</h4>
+                <div class="alert alert-info" *ngIf="proyectos.length === 0">
+                    <p class="mb-0">
+                        No se encontro ningun proyecto con ese termino
+                    </p>
+                </div>
+                <div class="table-responsive" *ngIf="proyectos.length > 0">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Cliente</th>
+                                <th>Estatus</th>
+                                <th class="">Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let proyecto of proyectos">
+                            <tr>
+                                <td>
+                                    {{proyecto.name}}
+                                </td>
+                                <td>
+                                    {{proyecto.client}}
+                                </td>
+                                <td>
+                                    <span *ngIf="proyecto.complete" class="label label-success">Completado</span>
+                                    <span *ngIf="!proyecto.complete" class="label label-inverse">No completado</span>
+                                </td>
+                               
+                           
+                                <td class="text-center">
+                                    <a [routerLink]="['/dashboard/proyecto',proyecto._id]" data-toggle="tooltip" data-original-title="Edit"> <i
+                                            class="mdi mdi-eye text-info m-r-10"></i> </a>
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

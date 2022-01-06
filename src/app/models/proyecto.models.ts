@@ -36,7 +36,7 @@ export class Proyecto {
         public manager:string,
         public complete:boolean,
         public status:boolean,
-        public outputs:boolean,
+        public outputs:any,
         public registerUser?: _proyectoUser,
     ) { }
 }

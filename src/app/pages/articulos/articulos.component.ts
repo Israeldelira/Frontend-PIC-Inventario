@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AdminGuard } from 'src/app/guards/admin.guard';
 import { Articulo } from 'src/app/models/articulos.model';
 import { ArticuloService } from 'src/app/services/articulo.service';
 import { BusquedaService } from 'src/app/services/busqueda.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,10 +17,15 @@ export class ArticulosComponent implements OnInit {
   public cargando: boolean = true;
   public totalArticulos: number = 0;
   public pagination: number = 0;
-  public urlImg: string="http://localhost:3000/api/upload/articles/"
+  //IP CASA
+  // public urlImg: string="http://192.168.1.88:3000/api/upload/articles/"
+//IP TRABAJO
+public urlImg: string="http://192.168.3.22:3000/api/upload/articles/"
   constructor(
     private articulosServices:ArticuloService,
-    private busquedaService:BusquedaService) { }
+    private busquedaService:BusquedaService,
+    private usuarioService:UsuarioService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.cargarArticulos()
@@ -57,7 +65,7 @@ console.log(resp)
     this.cargarArticulos();
   }
   eliminarArticulo(articulo:Articulo){
-   
+    if(this.usuarioService.roleUser==='ADMIN'){
     Swal.fire({
       title: '¿Deseas elimnar el articulo?',
       text: `Eliminar Articulo: ${articulo.name} `,
@@ -85,6 +93,17 @@ console.log(resp)
       
       }
     })
+  }else{
+    Swal.fire({
+      title: 'Alerta',
+      text: `Ops... Parece que estas perdido, no estas autorizado`,
+      icon: 'warning',
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'Entendido',
+      timer: 3500,
+    })
+    this.router.navigateByUrl('/dashboard')
+  }
   }
 
 }

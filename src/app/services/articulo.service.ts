@@ -57,13 +57,14 @@ cargarDashboardStock(pagination:number=0){
   return this.http.get<DashboardStock>(url, this.headers)
 .pipe(
   map(resp=>{
-    const articulosLow=resp.highStock
-    const articulosHigh=resp.lowStock
+    const articulosLow=resp.lowStock
+    const articulosHigh=resp.highStock
     const totalLow=resp.totalLow
     const totalHigh=resp.totalHigh
 
 
-      return{articulosLow,
+      return{
+        articulosLow,
         articulosHigh,
         totalLow,
         totalHigh

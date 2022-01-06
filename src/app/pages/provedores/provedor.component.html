@@ -7,8 +7,8 @@
         <form class="form" [formGroup]="provedoresForm" autocomplete="=off"
         (submit)="registrarProvedor()">
             <div class="form-group m-t-40 row">
-                <label for="example-text-input" class="col-2 col-form-label">Ingresa el nombre</label>
-                <div class="col-10">
+                <label for="example-text-input" class="col-md-2 col-form-label">Ingresa el nombre</label>
+                <div class="col-md-10">
                     <input class="form-control" type="text" placeholder="Nombre" 
                     id="example-text-input"
                     formControlName="name">
@@ -21,8 +21,8 @@
                 </div>
             </div>
             <div class="form-group m-t-40 row">
-                <label for="example-text-input" class="col-2 col-form-label">Ingresa la direccion</label>
-                <div class="col-10">
+                <label for="example-text-input" class="col-md-2 col-form-label">Ingresa la direccion</label>
+                <div class="col-md-10">
                     <input class="form-control" type="text" placeholder="Direccion" 
                     id="example-text-input"
                     formControlName="address">
@@ -35,11 +35,15 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="example-search-input" class="col-2 col-form-label">Ingresa el telefono</label>
-                <div class="col-10">
+                <label for="example-search-input" class="col-md-2 col-form-label">Ingresa el telefono</label>
+                <div class="col-md-10">
                     <input class="form-control" 
                     formControlName="phone"
-                    type="number" placeholder="Telefono" id="example-search-input">
+                    type="number" placeholder="Telefono" id="example-search-input"
+                    min="0" pattern="^[0-9]+"
+                    maxlength="10"
+                    oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" /><i>(Máximo 10 dígitos)</i>
+  
                 </div>
                 
                 <div class=" col text-danger">
@@ -56,7 +60,7 @@
     </div>
 </div>
 <div class="row" *ngIf="!mostrar">
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card" >
            
             <div class="card-body">
@@ -80,7 +84,7 @@
         </div>
     </div>
     <div
-    class="col-6">
+    class="col-md-6">
     <div class="card card-body">
         <h3 class="box-title m-b-0">Modificar provedor existente</h3>
         <p class="text-muted m-b-30 font-13">Formulario</p>
@@ -100,7 +104,11 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Telefono</label>
-                        <input formControlName="phone" type="number" class="form-control" id="exampleInputName" placeholder="Telefono">
+
+                        <input formControlName="phone" type="number" class="form-control" id="exampleInputName" placeholder="Telefono"
+                        min="0" pattern="^[0-9]+"
+                        maxlength="10"
+                        oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" /><i>(Máximo 10 dígitos)</i>
                     </div>
                     <button [disabled]="provedoresForm.invalid" type="submit" class="float-right btn btn-success waves-effect waves-light m-r-10"> <i class="fa fa-save m-r-10"></i>Guardar</button>
                     <button [routerLink]="['/dashboard/provedores']" type="button" class="float-left btn btn-info waves-effect waves-light m-r-10"> <i class="mdi mdi-arrow-left "> </i>   Regresar</button>

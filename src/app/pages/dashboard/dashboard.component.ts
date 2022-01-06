@@ -17,11 +17,13 @@ export class DashboardComponent implements OnInit {
   public totalIncompletos: number = 0;
   public articulosBajo:Articulo[]=[]
   public articulosAlto:Articulo[]=[]
-  public totalLow: number = 0;
-  public totalHigh: number = 0;
+  public totalLow: number=0;
+  public totalStock: number=0;
+  public totalHigh: number=0;
   totalUsuarios: number;
   public pagination: number = 0;
-  public urlImg: string="http://localhost:3000/api/upload/articles/"
+  
+  public urlImg: string="http://192.168.3.22:3000/api/upload/articles/"
 
   constructor(
     private dashboardProyectosService:ProyectoService,
@@ -29,12 +31,22 @@ export class DashboardComponent implements OnInit {
     private articulosService:ArticuloService
   ) { }
 
-  cambiarPagina(valor: number) {
+  cambiarPaginaBajo(valor: number) {
     console.log("este es el valor" + valor)
     this.pagination += valor;
     if (this.pagination < 0) {
       this.pagination = 0;
     } else if (this.pagination >= this.totalLow) {
+      this.pagination -= valor;
+    }
+    this.dashboardStock();
+  }
+  cambiarPaginaAlto(valor: number) {
+    console.log("este es el valor" + valor)
+    this.pagination += valor;
+    if (this.pagination < 0) {
+      this.pagination = 0;
+    } else if (this.pagination >= this.totalHigh) {
       this.pagination -= valor;
     }
     this.dashboardStock();
@@ -69,6 +81,8 @@ console.log("si jala "+totalCompletos)
       this.articulosBajo= articulosLow
       this.totalHigh =totalHigh
       this.totalLow =totalLow
+      this.totalStock=totalHigh+totalLow;
+
     }
        )
   }

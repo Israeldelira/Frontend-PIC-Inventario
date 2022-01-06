@@ -25,6 +25,8 @@ import { ProyectoComponent } from './proyectos/proyecto.component';
 import { EntradasComponent } from './almacen/entradas/entradas.component';
 import { SalidasComponent } from './almacen/salidas/salidas.component';
 import { MovimientosComponent } from './almacen/movimientos/movimientos.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
+import { ProyectoBajasComponent } from './proyecto-bajas/proyecto-bajas.component';
 
 
 
@@ -48,7 +50,10 @@ import { MovimientosComponent } from './almacen/movimientos/movimientos.componen
     ProyectoComponent,
     EntradasComponent,
     SalidasComponent,
-    MovimientosComponent
+    MovimientosComponent,
+    BusquedaComponent,
+    ProyectoBajasComponent,
+
  
   
   ],

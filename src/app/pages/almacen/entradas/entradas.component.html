@@ -50,8 +50,9 @@
                         <thead>
                             <tr>
                                 <th class="w100">Articulo</th>
-                                <th>Cantidad</th>
                                 <th class="w100">Registro</th>
+                                <th>Cantidad</th>
+                                
                                 <th class="w100">Fecha</th>
                               
                             </tr>
@@ -90,12 +91,12 @@
 <div class="card" *ngIf="mostrarFormEntrada">
 
     <div class="card-body">
-        <h3 class="box-title m-t-18">Agregar baja de material</h3>
+        <h3 class="box-title m-t-18">Agregar entrada de material</h3>
         <form [formGroup]="entradaForm" (submit)="registrarEntrada()">
             <div class="row">
                 <div class="col-md-12 " *ngIf="valor">
                     <div class="form-group">
-                        <label>El articulo seleccionado es {{articuloSeleccionado?.article.name}}</label>
+                       <h4>El articulo seleccionado es {{articuloSeleccionado?.article.name}}</h4> 
                     </div>
                 </div>
                 <div class="col-md-12 " *ngIf="!valor">
@@ -108,7 +109,14 @@
                             </option>
                         </select>
                     </div>
+                    <div class="row">
+                        <div class=" col text-danger">
+                            <p *ngIf="campoNoValido('article')">El articulo es requerido</p>
+                            <p></p>
+                        </div>
+                    </div>
                 </div>
+               
             </div>
             <div class="row">
               
@@ -116,17 +124,24 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Cantidad</label>
-                        <input type="number" min="1" class="form-control" formControlName="quantity"
+                        <input type="number" min="1" pattern="^[0-9]+" class="form-control" formControlName="quantity"
                             placeholder="Cantidad">
                     </div>
+                    <div class="row">
+                        <div class=" col text-danger">
+                            <p *ngIf="campoNoValido('quantity')">La cantidad es requerida es requerido</p>
+                            <p></p>
+                        </div>
+                    </div>
                 </div>
+               
 
             </div>
             <!--/row-->
             
 
             <button type="submit" class="float-right btn btn-success waves-effect waves-light m-r-10"
-                [disabled]="entradaForm.invalid"> <i class="fa fa-save m-r-10"></i>Guardar</button>
+                > <i class="fa fa-save m-r-10"></i>Guardar</button>
             <button [routerLink]="['/dashboard/entradas','vacio']" type="button"
                 class="float-left btn btn-info waves-effect waves-light m-r-10"> <i class="mdi mdi-arrow-left "> </i>
                 Regresar</button>

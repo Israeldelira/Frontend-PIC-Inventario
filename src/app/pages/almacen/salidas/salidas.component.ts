@@ -175,15 +175,17 @@ cargarArticulo(id: string) {
         Swal.fire({
 
           icon: 'success',
-          title: 'Se a registrado la baja del material seleccionado',
+          title: 'Registro exitoso',
+          text:'Salida de material agregada correctamente',
           confirmButtonColor: '#3085d6',
           timer: 3500,
           confirmButtonText: 'Ok'
         })
         this.router.navigate(['/dashboard/salidas/vacio'])
+        this.bajaForm.reset();
       }, (err) => {
         Swal.fire({
-          title: 'Ocurrio un error',
+          title: 'Error',
           text: err.error.msg,
           icon: 'error',
           confirmButtonColor: '#3085d6',

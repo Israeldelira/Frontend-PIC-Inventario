@@ -3,7 +3,7 @@
         <div class="card">
 <div class="card-body">
     <input type="text" class="form-control" placeholder="Buscar proyecto"
-  
+    (keyup)="buscar(termino.value)"
     #termino />
 </div>
         </div>
@@ -29,10 +29,8 @@
 
                 <div class="row">
                     <div class="col-8">
-                        <h4 class="card-title">Total de proyectos: ({{proyectos.length}}) </h4>
-                        <h6 class="card-subtitle">
-                         Proyectos de  PIC SOLUTIONS
-                        </h6>
+                        <h4 class="card-title">Total de proyectos: ({{proyectos.length}} - {{pagination}}) </h4>
+         
                     </div>
                     <div class="col">
                         <div class="text-right">
@@ -48,12 +46,12 @@
                     <table class="table full-color-table full-inverse-table table-striped table-hover ">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Cliente</th>
-                                <th>Encargado</th>
+                                <th class="w180-c">Nombre</th>
+                                <th class="w180-c">Cliente</th>
+                                <th class="w100-c">Encargado</th>
                                 <th>Completado</th>
-                                <th>Cantidad de bajas</th>
-                                <th class="w100">Acciones</th>
+                                <th class="text-center">Ver bajas</th>
+                                <th class="">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,21 +61,29 @@
                                  {{proyecto.name}}
                           </td>
                                      
-                                    <td class="w100-c">
+                                    <td class="w180-c">
                                         {{proyecto.client}}
                                       </td>
 
-                                        <td class="text-nowrap w100">
+                                        <td class="text-nowrap w180-c">
                                             {{proyecto.manager}} 
                                         </td>
-                                        <td class="text-nowrap">
+                                        <td class="text-nowrap w100-c">
                                             <span *ngIf="proyecto.complete" class="label label-success">Completado</span>
                                             <span *ngIf="!proyecto.complete" class="label label-inverse">No completado</span>
                                            
                                         </td>
-                                        <td class="text-nowrap w100">
-                                            {{proyecto.outputs?.name}} 
+                                        <td class="text-nowrap text-center" >
+                                            <a [routerLink]="['/dashboard/proyecto-bajas',proyecto._id]"  class="cursor" data-toggle="tooltip" data-original-title="Ver bajas del proyecto"> 
+                                                <i class="mdi mdi-eye text-info"></i> </a>
+                                            
+                                            <!-- <p *ngFor="let salida of proyecto.outputs; let i = index">
+                                            Articulo:{{salida.article}}
+                                            Cantidad:{{salida.quantity}}
+                                         </p> -->
+
                                         </td>
+
                                 <td class="text-nowrap w100">
                                    
                                     <a (click)="completarProyecto(proyecto)"  class="cursor" data-toggle="tooltip" data-original-title="Finalizar proyecto"> 

@@ -70,7 +70,7 @@ obtenerProyectoss() {
   );
 }
 
-crearProyecto(proyecto: { name: string, client: string,manager: string, output: string }){
+crearProyecto(proyecto: { name: string, client: string,manager: string }){
   const url = `${base_url}/project/create-project`;
   return this.http.post(url,proyecto,this.headers)
 }

@@ -1,10 +1,12 @@
 <div class="row animated fadeIn fast">
     <div class="col-12">
         <div class="card">
+            
 <div class="card-body">
     <input type="text" class="form-control" placeholder="Buscar articulo"
     (keyup)="buscar(termino.value)"
     #termino
+
   />
 </div>
         </div>
@@ -28,11 +30,9 @@
 
                 <div class="row">
                     <div class="col-8">
-                        <h4 class="card-title">Total de Articulos: ({{totalArticulos}}) - ({{pagination}}) </h4>
-                        <h6 class="card-subtitle">
-                         Articulos de almacen
-                        </h6>
+                        <h4 class="card-title">  Total de Articulos: ({{totalArticulos}}) - ({{pagination}}) </h4>
                     </div>
+                  
                     <div class="col">
                         <div class="text-right">
                             <button [routerLink]="['/dashboard/articulo','nuevo']" class="btn btn-themecolor">
@@ -53,7 +53,7 @@
                                 <th>Categoria</th>
                                 <th>Provedor</th>
                                 <th>Registro</th>
-                                <th>Cantidad</th>
+                                <th class="text-center">Cantidad</th>
                                 <th>Imagen</th>
                                 <th class="w100">Acciones</th>
                             </tr>
@@ -68,15 +68,15 @@
                    
                                     <td class="w100-c">{{articulo.providerId?.name}}</td>
                                     <td class="w100-c">{{articulo.registerUser?.nombre}}</td>
-                                    <td class="w100-c">{{articulo.quantity}}</td>
-                                    <td class="w100-c"><img src="{{urlImg}}{{articulo.img}}" alt="Articulo"class="avatar cursor" ></td>
+                                    <td class="text-center">{{articulo.quantity}}</td>
+                                    <td class="articulo-img"><img src="{{urlImg}}{{articulo.img}}" alt="Articulo"class="w100-c-img" ></td>
                                     
                                 <td class="text-nowrap w100">
-                                    <a  [routerLink]="['/dashboard/entradas',articulo._id]" class="cursor" data-toggle="tooltip" data-original-title="Entrada de articulo"> 
+                                    <a  [routerLink]="['/dashboard/entradas',articulo._id]" class="cursor" data-toggle="tooltip" data-original-title="Agregar entrada de articulo"> 
                                         <i class="mdi mdi-plus-box-outline  text-success"></i> </a>
                                         &nbsp;
                                         &nbsp;
-                                        <a  [routerLink]="['/dashboard/salidas',articulo._id]" class="cursor" data-toggle="tooltip" data-original-title="Baja de articulo"> 
+                                        <a  [routerLink]="['/dashboard/salidas',articulo._id]" class="cursor" data-toggle="tooltip" data-original-title="Agregar baja de articulo"> 
                                             <i class="mdi mdi-minus-box-outline text-danger"></i> </a>
                                             &nbsp;
                                             &nbsp;   

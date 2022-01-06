@@ -1,0 +1,64 @@
+
+
+<div class="card">
+    <div class="col-12">
+        <div class="card">
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-8">
+                        <h4 class="card-title">Todas las bajas del proyecto {{ proyecto?.project.name}}</h4>
+                        
+                    </div>
+                    <div class="col">
+                        <div class="text-right">
+                            <button [routerLink]="['/dashboard/salidas','nueva']" class="btn btn-themecolor">
+                                <i class="mdi mdi-keyboard-backspace"></i>
+                             Regresar
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="table-responsive">
+                    <table class="table full-color-table full-inverse-table table-striped table-hover ">
+                        <thead>
+                            <tr>
+                                <th class="w100">Articulo</th>
+                                <th class="w100">Cantidad</th>
+                                <th class="w220 text-center">Descripcion</th>
+                                <th class="w100">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let salida of proyecto?.project.outputs; let i = index" >
+              
+                                <td class="text-nowrap w100">
+                                    {{salida.article}}
+                                  </td>
+            
+                                    <td class="text-nowrap w100">
+                                        {{salida.quantity}}
+                                    </td>
+                                    <td class="text-nowrap w220 text-center">
+                                        {{salida.description}}
+                                    </td>
+                                    <td class="text-nowrap w100">
+                                       
+                                        {{ formattedDate(salida.created_at) }}
+                                    </td>
+                                
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+              
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -5,7 +5,7 @@
                 <div class="d-flex no-block">
                     <div class="m-r-10 align-self-center"><span class="lstick m-r-10"></span></div>
                     <div class="align-self-center">
-                        <h6 class="text-inverse m-t-6 m-b-0">Proyectos en proceso</h6>
+                        <h6 class="text-muted m-t-6 m-b-0">Proyectos en proceso</h6>
                         <h2 class="m-t-0">{{totalIncompletos}}</h2></div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                 <div class="d-flex no-block">
                     <div class="m-r-10 align-self-center"><span class="lstick m-r-10"></span></div>
                     <div class="align-self-center">
-                        <h6 class="text-inverse m-t-6 m-b-0">Proyectos completos</h6>
+                        <h6 class="text-muted m-t-6 m-b-0">Proyectos completos</h6>
                         <h2 class="m-t-0">{{totalCompletos}}</h2>
                     </div>
                 </div>
@@ -36,30 +36,164 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="m-r-10 align-self-center"><span class="lstick m-r-20"></span></div>
+                    <div class="align-self-center">
+                        <h6 class="text-muted m-t-6 m-b-0">Total de stock bajo</h6>
+                        <h2 class="m-t-0">{{totalStock}}</h2></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<section class="pt-2 pb-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="mb-3">Alerta de material de alta demanda</h3>
+            </div>
+            <div class="col-6 text-right">
+                <a  (click)="cambiarPaginaAlto(-3)" class="btn btn-info mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a (click)="cambiarPaginaAlto(+3)" class="btn btn-info mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="col-12">
+                <div *ngIf="totalHigh===0">
+                    <div class="alert alert-info col-md-12">STOCK COMPLETO - El material de alta demanda esta completo</div>
+                </div>
+                <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
 
-<div class="container-fluid">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                               
+                                <!-- <div class="col-md-4 mb-3 text-center" *ngFor="let articulo of articulosAlto"> -->
+                                    <div class="col-lg-4 col-md-6 my-3 d-flex text-center" *ngFor="let articulo of articulosAlto">
+                                        
+                                        <div class="card h-100 ">
+                                            <div class="img-card">
+                                                <img style="max-width: calc(80% - 0px); max-height: calc(80% - 0px);  height: 200px; min-height: 200px; margin-top: 20px;"src="{{urlImg}}{{articulo.img}}" alt="Articulo" class="img-fluid" alt="100%x280">
+        
+                                        </div>
+                                   
+                                        <div class="card-body" style="margin-top: 20px;">
+                                       
+                                                <h4 class="card-title">Articulo: {{articulo.name}}</h4>
+                                                <p class="card-text">Cantidad: {{articulo.quantity}} </p>
+                                         
+                                            <br>
+                                            <div class="align-self-end text-center">
+                                                <button [routerLink]="['/dashboard/entradas',articulo._id]" type="button" class="btn btn-info text-center">Agregar stock</button>
+                                            </div>
+
+                                            
+                                            
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                              
+
+                            </div>
+                        </div>
+                     
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pt-2 pb-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="mb-3">Alerta de material de baja demanda</h3>
+            </div>
+            <div class="col-6 text-right">
+                <a  (click)="cambiarPaginaBajo(-3)" class="btn btn-info mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a (click)="cambiarPaginaBajo(+3)" class="btn btn-info mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="col-12">
+                <div *ngIf="totalLow===0">
+                    <div class="alert alert-info col-md-12">STOCK COMPLETO - El material de baja demanda esta completo </div>
+                </div>
+                <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <!-- <div class="col-md-4 mb-3 text-center" *ngFor="let articulo of articulosAlto"> -->
+                                    <div class="col-lg-4 col-md-6 my-3 d-flex text-center" *ngFor="let articulo of articulosBajo">
+                                        <div class="card h-100 ">
+                                            <div class="img-card">
+                                                <img style="max-width: calc(80% - 0px); max-height: calc(80% - 0px);  height: 200px; min-height: 200px; margin-top: 20px;"src="{{urlImg}}{{articulo.img}}" alt="Articulo" class="img-fluid" alt="100%x280">
+        
+                                        </div>
+                                   
+                                        <div class="card-body" style="margin-top: 20px;">
+                                       
+                                                <h4 class="card-title">Articulo: {{articulo.name}}</h4>
+                                                <p class="card-text">Cantidad: {{articulo.quantity}} </p>
+                                         
+                                            <br>
+                                            <div class="align-self-end text-center">
+                                                <button [routerLink]="['/dashboard/entradas',articulo._id]" type="button" class="btn btn-info text-center">Agregar stock</button>
+                                            </div>
+
+                                            
+                                            
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                              
+
+                            </div>
+                        </div>
+                     
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-12">
-			<div id="inam" class="carousel slide" data-ride="carousel">
+			<div id="inam" class="carousel slide"  data-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						 <div class="container">
 						 	<div class="row">
 						 		<div class="col-sm-12 col-lg-4" *ngFor="let articulo of articulosAlto">
-						 			<div class="card"  style="width: 300px;margin: auto;">
-                                        <img src="{{urlImg}}{{articulo.img}}" alt="Articulo" class="card-img-top">
+						 			<div class="card text-center card-stock"  style="width: 300px;margin: auto;">
+                                        <img src="{{urlImg}}{{articulo.img}}" alt="Articulo" class="img-card">
 						 				<div class="card-body text-center">
 						 					<h4 class="card-title">{{articulo.name}}</h4>
 						 					<p class="card-text">{{articulo.quantity}} </p>
-						 					<button type="button" class="btn btn-success text-center">Agregar articulo</button>
+						 					<button type="button" class="btn btn-info text-center">Agregar stock</button>
 						 					
 						 				</div>
 						 				
 						 			</div>
 						 			
 						 		</div>
-						 		<!-- <div class="col-sm-12 col-lg-4">
+						 		 <div class="col-sm-12 col-lg-4">
 						 			<div class="card" style="width: 300px;">
 						 				<img src="images/b.jpg" class="card-img-top">
 						 				<div class="card-body">
@@ -71,8 +205,8 @@
 						 				
 						 			</div>
 						 			
-						 		</div> -->
-						 		<!-- <div class="col-sm-12 col-lg-4">
+						 		</div> 
+						 		 <div class="col-sm-12 col-lg-4">
 						 			<div class="card" style="width: 300px;">
 						 				<img src="images/c.jpg" class="card-img-top">
 						 				<div class="card-body">
@@ -84,7 +218,7 @@
 						 				
 						 			</div>
 						 			
-						 		</div> -->
+						 		</div> 
 						 		
 						 	</div>
 						 	
@@ -92,7 +226,7 @@
 
 						
 					</div>
-					<!-- <div class="carousel-item">
+					 <div class="carousel-item">
 						 <div class="container">
 						 	<div class="row">
 						 		<div class="col-sm-12 col-lg-4">
@@ -140,15 +274,16 @@
 						 </div>
 
 						
-					</div> -->
+					</div> 
 					
 				</div>
-				<a (click)="cambiarPagina(-3)" href="#inam" class="carousel-control-prev" data-slide="prev">
-					<span class="carousel-control-prev-icon"></span>
+              
+				<a (click)="cambiarPagina(-3)" href="#inam" class="carousel-control-prev text-left" data-slide="prev">
+					<span class="mdi mdi-arrow-left-bold text-dark"></span>
 				</a>
-				<a (click)="cambiarPagina(+3)" href="#inam" class="carousel-control-next" data-slide="next">
-					<span class="carousel-control-next-icon"></span>
-				</a>
+				<a (click)="cambiarPagina(+3)" href="#inam" class="carousel-control-next text-right" data-slide="next">
+					<span class="mdi mdi-arrow-right-bold text-dark"></span> 
+				</a> 
 				
 			</div>
 			
@@ -156,5 +291,5 @@
 		
 	</div>
 	
-</div>
-<app-grafica-dona></app-grafica-dona>
+</div> -->
+

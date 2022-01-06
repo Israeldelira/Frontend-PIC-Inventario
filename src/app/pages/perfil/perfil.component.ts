@@ -79,11 +79,19 @@ public usuario!: Usuario
       const{nombre,user}=this.perfilForm.value;
       this.usuario.nombre=nombre
       this.usuario.user=user;
-      Swal.fire('Guardado', 'Cambios fueron guardados','success');
+      this.perfilForm.reset();
+      Swal.fire({
+        icon: 'success',
+        title: 'Actualizado',
+        text: 'Se actualizaron los datos de manera correcta',
+        confirmButtonColor: '#3085d6',
+        timer: 3500,
+        confirmButtonText: 'Ok'
+      })
     },(err)=>{
       console.log(err);
       Swal.fire({
-        title: 'Ocurrio un error',
+        title: 'Error',
         text: err.error.msg,
         icon: 'error',
         confirmButtonColor: '#3085d6',
@@ -130,7 +138,14 @@ public usuario!: Usuario
       .actualizarFoto( this.imagenSubir, 'users', this.usuario._id || '' )
       .then( image => {
         this.usuario.img = image;
-        Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
+        Swal.fire({
+          icon: 'success',
+          title: 'Actualizado',
+          text: 'Se actualizo la foto de manera correcta',
+          confirmButtonColor: '#3085d6',
+          timer: 3500,
+          confirmButtonText: 'Ok'
+        })
       }).catch( error => {
         console.log("no muestra ningun error"+error);
      

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { Categoria } from 'src/app/models/categoria.model';
 import { BusquedaService } from 'src/app/services/busqueda.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
@@ -31,6 +32,7 @@ cargarCategorias(){
   .subscribe(({total,categorias})=>{
   this.cargando=false;
    this.categorias=categorias
+   this.categoriasTemp=categorias
    this.totalCategorias=total
   })
 }
@@ -54,6 +56,7 @@ guardarCambios(categoria:Categoria){
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'Ok'
     })
+    this.cargarCategorias();
   },(err)=>{
     console.log(err);
     Swal.fire({
@@ -109,7 +112,7 @@ eliminarCategoria(categoria:Categoria){
  async abrirModalSA(){
   const {value=''} = await Swal.fire<string >({
     input: 'text',
-    title:'Registrar una nueva categoria',
+    title:'Registrar nueva categoria',
     text:'Ingresa la categoria',
     confirmButtonColor: '#2488E8',
     cancelButtonColor: '#CE2804',
@@ -127,7 +130,8 @@ eliminarCategoria(categoria:Categoria){
       Swal.fire({
         
         icon: 'success',
-        title: 'La categoria se creo correctamente',
+        title: 'Registrado',
+        text: 'La categoria se registro correctamente ',
         confirmButtonColor: '#3085d6',
         timer: 3500,
         confirmButtonText: 'Ok'
@@ -135,7 +139,7 @@ eliminarCategoria(categoria:Categoria){
     },(err)=>{
       console.log(err);
       Swal.fire({
-        title: 'Ocurrio un error',
+        title: 'Error',
         text: err.error.msg,
         icon: 'error',
         confirmButtonColor: '#3085d6',
@@ -156,7 +160,9 @@ eliminarCategoria(categoria:Categoria){
   //   })
   //  }
 }
-
+formattedDate(date) {
+  return moment(date).format("DD/MM/YYYY HH:mm")
+}
 buscar( termino: string ) {
 
   if ( termino.length === 0 ) {

@@ -29,10 +29,8 @@
 
                 <div class="row">
                     <div class="col-8">
-                        <h4 class="card-title">Total de categorias ({{categorias.length}})</h4>
-                        <h6 class="card-subtitle">
-                            Categorias de los articulos de inventario
-                        </h6>
+                        <h4 class="card-title">Total de categorias ({{categorias.length}} - {{pagination}})</h4>
+    
                     </div>
                     <div class="col">
                         <div class="text-right">
@@ -48,17 +46,19 @@
                     <table class="table full-color-table full-inverse-table table-striped table-hover ">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Registro</th>
+                                <th class="w300">Nombre</th>
+                                <th class="w100">Registro</th>
+                                <th>Fecha</th>
                                 <th class="w100">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let categoria of categorias">
-                                <td class="w180" ><input type="text" class="form-control" 
+                                <td class="w300" ><input type="text" class="form-control" 
                                     placeholder="Nombre de la categoria" 
                                     [(ngModel)]="categoria.name"></td>
                                     <td class="w100-c">{{categoria.registerUser?.user}}</td>
+                                    <td class="w100-c"> {{ formattedDate(categoria.created_at) }}</td>
                                 <td class="text-nowrap w100">
                                     <a (click)="guardarCambios(categoria);" class="cursor" data-toggle="tooltip" data-original-title="Guardar cambios"> 
                                         <i class="fa fa-pencil  text-info"></i> </a>
