@@ -78,7 +78,7 @@ export class ProvedorComponent implements OnInit {
           timer: 3500,
           confirmButtonText: 'Ok'
         })
-        
+        this.router.navigateByUrl('/dashboard/provedores');
       }, (err) => {
         Swal.fire({
           title: 'Error',
