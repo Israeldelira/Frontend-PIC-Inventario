@@ -9,13 +9,14 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-menuItems:any[];
+// menuItems:any[];
 // public imgUrl ='';
 public usuario!:Usuario;
 
-  constructor(private slidebarService: SlidebarService,
+  constructor(
+    public sidebarService: SlidebarService,
     private  usuarioService:UsuarioService) { 
-    this.menuItems=slidebarService.menu;
+    // this.menuItems=slidebarService.menu;
     // this.imgUrl= usuarioService.usuario.imgUrl
     this.usuario=usuarioService.usuario;
   }

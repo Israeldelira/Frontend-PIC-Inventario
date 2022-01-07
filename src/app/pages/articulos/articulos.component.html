@@ -1,1 +1,106 @@
-<p>articulos works!</p>
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            
+<div class="card-body">
+    <input type="text" class="form-control" placeholder="Buscar articulo"
+    (keyup)="buscar(termino.value)"
+    #termino
+
+  />
+</div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn fast" *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+    </div>
+</div>
+
+<div  class="card" *ngIf="!cargando" >
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="card-title">  Total de Articulos: ({{totalArticulos}}) - ({{pagination}}) </h4>
+                    </div>
+                  
+                    <div class="col">
+                        <div class="text-right">
+                            <button [routerLink]="['/dashboard/articulo','nuevo']" class="btn btn-themecolor">
+                                <i class="fa fa-plus-circle"></i>
+                                Agregar articulo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="table-responsive">
+                    <table class="table full-color-table full-inverse-table table-striped table-hover ">
+                        <thead>
+                            <tr >
+                                <th>Nombre</th>
+                                <th>Modelo</th>
+                                <th>Marca</th>
+                                <th>Categoria</th>
+                                <th>Provedor</th>
+                                <th>Registro</th>
+                                <th class="text-center">Cantidad</th>
+                                <th>Imagen</th>
+                                <th class="w100">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let articulo of articulos" >
+                                <td class="w180">{{articulo.name}} </td>
+                            <td class="w180" >{{articulo.model}}</td>
+                                     
+                                    <td class="w100-c">{{articulo.trademark}}</td>
+                                    <td class="w100-c">{{articulo.category?.name}}</td>
+                   
+                                    <td class="w100-c">{{articulo.providerId?.name}}</td>
+                                    <td class="w100-c">{{articulo.registerUser?.nombre}}</td>
+                                    <td class="text-center">{{articulo.quantity}}</td>
+                                    <td class="articulo-img"><img src="{{urlImg}}{{articulo.img}}" alt="Articulo"class="w100-c-img" ></td>
+                                    
+                                <td class="text-nowrap w100">
+                                    <a  [routerLink]="['/dashboard/entradas',articulo._id]" class="cursor" data-toggle="tooltip" data-original-title="Agregar entrada de articulo"> 
+                                        <i class="mdi mdi-plus-box-outline  text-success"></i> </a>
+                                        &nbsp;
+                                        &nbsp;
+                                        <a  [routerLink]="['/dashboard/salidas',articulo._id]" class="cursor" data-toggle="tooltip" data-original-title="Agregar baja de articulo"> 
+                                            <i class="mdi mdi-minus-box-outline text-danger"></i> </a>
+                                            &nbsp;
+                                            &nbsp;   
+                                    <a  [routerLink]="['/dashboard/articulo',articulo._id]" class="cursor" data-toggle="tooltip" data-original-title="Editar"> 
+                                        <i class="fa fa-pencil  text-info"></i> </a>
+                                        &nbsp;
+                                        &nbsp;
+                                    <a (click)="eliminarArticulo(articulo)" class="cursor" data-toggle="tooltip" data-original-title="Borrar"> 
+                                        <i class="fa fa-trash text-danger"></i> </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <div  *ngIf="termino.value.length===0">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anterior</button>
+                    &nbsp;
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+    
+</div>
+

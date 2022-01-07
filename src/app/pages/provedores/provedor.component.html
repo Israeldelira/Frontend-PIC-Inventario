@@ -1,0 +1,120 @@
+
+<div class="card" *ngIf="mostrar">
+    <div class="card-body">
+        <h4 class="card-title">Agrega un nuevo provedor</h4>
+        <h6 class="card-subtitle"> Ingresa los datos del nuevo provedor </h6>
+       
+        <form class="form" [formGroup]="provedoresForm" autocomplete="=off"
+        (submit)="registrarProvedor()">
+            <div class="form-group m-t-40 row">
+                <label for="example-text-input" class="col-md-2 col-form-label">Ingresa el nombre</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" placeholder="Nombre" 
+                    id="example-text-input"
+                    formControlName="name">
+                </div>
+                <div class="row">
+                    <div class=" col text-danger">
+                        <p *ngIf="campoNoValido('name')">El nombre es requerido</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group m-t-40 row">
+                <label for="example-text-input" class="col-md-2 col-form-label">Ingresa la direccion</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" placeholder="Direccion" 
+                    id="example-text-input"
+                    formControlName="address">
+                </div>
+                <div class="row">
+                    <div class=" col text-danger">
+                        <p *ngIf="campoNoValido('address')">La direccion es requerida</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-search-input" class="col-md-2 col-form-label">Ingresa el telefono</label>
+                <div class="col-md-10">
+                    <input class="form-control" 
+                    formControlName="phone"
+                    type="number" placeholder="Telefono" id="example-search-input"
+                    min="0" pattern="^[0-9]+"
+                    maxlength="10"
+                    oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" /><i>(Máximo 10 dígitos)</i>
+  
+                </div>
+                
+                <div class=" col text-danger">
+                    <p *ngIf="campoNoValido('phone')">El telefono es requerido</p>
+                    <p></p>
+                </div>
+            </div>
+            <button [routerLink]="['/dashboard/provedores']" type="button" class="float-left btn btn-info waves-effect waves-light m-r-15"> <i class="mdi mdi-arrow-left "> </i> Regresar </button>
+            <button [disabled]="provedoresForm.invalid" type="submit" class="float-right btn btn-success waves-effect waves-light m-r-10"> <i class="fa fa-save m-r-10"></i>Guardar</button>
+
+
+          
+        </form>
+    </div>
+</div>
+<div class="row" *ngIf="!mostrar">
+    <div class="col-md-6">
+        <div class="card" >
+           
+            <div class="card-body">
+                   <h3 class="card-title">Provedor seleccionado</h3>
+                <p class="text-muted m-b-10 font-13">Nombre</p>
+                 <h5> {{ proveedor?.provider.name}}</h5> 
+                <br>
+                <p class="text-muted m-b-10 font-13"> Telefono</p>
+                    <h5> {{ proveedor?.provider.phone}}</h5> 
+               
+                <br>
+                <p class="text-muted m-b-10 font-13">Direccion</p>
+                <h5> {{ proveedor?.provider.address}}</h5> 
+               <br>
+                <p class="text-muted m-b-10 font-13">Registrado por</p>
+                <h5>{{ proveedor?.provider.registerUser?.user }}</h5> 
+                <br>
+                <br>
+               
+            </div>
+        </div>
+    </div>
+    <div
+    class="col-md-6">
+    <div class="card card-body">
+        <h3 class="box-title m-b-0">Modificar provedor existente</h3>
+        <p class="text-muted m-b-30 font-13">Formulario</p>
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <form
+                [formGroup]="provedoresForm"
+                        (submit)="actualizarProvedor()">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre</label>
+                        <input formControlName="name" type="text" class="form-control" id="exampleInputName" placeholder="Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Direccion</label>
+                        <input formControlName="address"  type="text" class="form-control" id="exampleInputName" placeholder="Direccion">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Telefono</label>
+
+                        <input formControlName="phone" type="number" class="form-control" id="exampleInputName" placeholder="Telefono"
+                        min="0" pattern="^[0-9]+"
+                        maxlength="10"
+                        oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" /><i>(Máximo 10 dígitos)</i>
+                    </div>
+                    <button [disabled]="provedoresForm.invalid" type="submit" class="float-right btn btn-success waves-effect waves-light m-r-10"> <i class="fa fa-save m-r-10"></i>Guardar</button>
+                    <button [routerLink]="['/dashboard/provedores']" type="button" class="float-left btn btn-info waves-effect waves-light m-r-10"> <i class="mdi mdi-arrow-left "> </i>   Regresar</button>
+                </form>
+            </div>
+        </div>
+    </div></div>
+</div>
+

@@ -1,0 +1,274 @@
+<!-- Visualiza los datos del formulario que se escriben -->
+<!-- <pre>{{articuloForm.value | json}}</pre> -->
+<div class="card" *ngIf="mostrar !imprimirQR">
+    <div class="card-body">
+        <h3 class="box-title m-t-18">Agregar nuevo articulo al almacen</h3>
+        <form [formGroup]="articuloForm" (ngSubmit)="guardarArticulo()">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" formControlName="name" placeholder="Nombre">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Modelo</label>
+                        <input type="text" class="form-control" formControlName="model" placeholder="Modelo">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Marca</label>
+                        <input type="text" class="form-control" formControlName="trademark" placeholder="Marca">
+                    </div>
+                </div>
+
+            </div>
+            <!--/row-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select formControlName="category" class="form-control custom-select">
+                            <option></option>
+                            <option *ngFor="let categoria of categorias" value="{{categoria._id}}">
+                                {{categoria.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!--/span-->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Provedor</label>
+                        <select formControlName="providerId" (change)="changeProvedor($event)"
+                            class="form-control custom-select">
+                            <option></option>
+                            <option *ngFor="let provedor of provedores" value="{{provedor._id}}">
+                                {{provedor.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Prioridad en el almacen</label>
+                        <select formControlName="levelStock" class="form-control">
+
+                            <option value="Alto">Alto</option>
+                            <option value="Bajo">Bajo</option>
+                        </select>
+                    </div>
+                </div>
+                <!--/span-->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Cantidad</label>
+                        <input type="number" class="form-control" min="0" pattern="^[0-9]+" formControlName="quantity"
+                            placeholder="Cantidad">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Subir imagen del articulo</label>
+                <input (change)="onFileChange($event)" accept=".png, .jpg, .jpeg" formControlName="img" type="file"
+                    class="form-control" id="exampleInputFile" aria-describedby="fileHelp">
+            </div>
+            <br>
+
+            <button type="submit" class="float-right btn btn-success waves-effect waves-light m-r-10"
+                [disabled]="articuloForm.invalid"> <i class="fa fa-save m-r-10"></i>Guardar</button>
+            <button [routerLink]="['/dashboard/articulos']" type="button"
+                class="float-left btn btn-info waves-effect waves-light m-r-10"> <i class="mdi mdi-arrow-left "> </i>
+                Regresar</button>
+        </form>
+    </div>
+
+</div>
+<div class="row" *ngIf="!mostrar">
+    <div class="col-md-6">
+        <div class="card">
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-7" *ngIf="!imprimirQR">
+                        <p class="text-muted m-b-10 font-13"> Nombre</p>
+                        <h6>{{ articulo?.article.name}}</h6>
+                        <br>
+                        <p class="text-muted m-b-10 font-13">Modelo</p>
+                        <h6>{{ articulo?.article.model}}</h6>
+                        <br>
+                        <p class="text-muted m-b-10 font-13">Marca</p>
+                        <h6>{{ articulo?.article.trademark}}</h6>
+                        <br>
+                        <p class="text-muted m-b-10 font-13">Categoria</p>
+                        <h6>{{ articulo?.article.category?.name}}</h6>
+                        <br>
+                        <p class="text-muted m-b-10 font-13">Provedor</p>
+                        <h6>{{ articulo?.article.providerId?.name}}</h6>
+
+                    </div>
+                    <div class="col-md-5">
+
+                        <br>
+                        <p *ngIf="!imprimirQR" class="text-muted m-b-10 font-13">Prioridad en el almacen</p>
+                        <h6 *ngIf="!imprimirQR" >{{ articulo?.article.levelStock}}</h6>
+                        <br>
+                        <p *ngIf="!imprimirQR" class="text-muted m-b-10 font-13">Cantidad</p>
+                        <h6 *ngIf="!imprimirQR">{{ articulo?.article.quantity}}</h6>
+                        <p class="text-muted m-b-10 font-13 ">Codigo QR</p>
+                        <div class="img-card">
+                            <img id="QR" class="img-fluid" src="{{articulo?.article.codeQR}}">
+
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="row text-center">
+                    <div class="col-md-12 text-center">
+
+                        <button type="printer" (click)="printer()" class="btn btn-info waves-effect  m-r-10"> <i
+                                class="mdi mdi-printer m-r-10"></i>Imprimir QR</button>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6" *ngIf="!imprimirQR">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="box-title m-t-18">Modificar el articulo seleccionado</h3>
+                <form [formGroup]="articuloForm" (ngSubmit)="actualizarArticulo()">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text" class="form-control" formControlName="name" placeholder="Nombre">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Modelo</label>
+                                <input type="text" class="form-control" formControlName="model" placeholder="Marca">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Marca</label>
+                                <input type="text" class="form-control" formControlName="trademark" placeholder="Marca">
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--/row-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <select formControlName="category" class="form-control custom-select">
+                                    <option></option>
+                                    <option *ngFor="let categoria of categorias" value="{{categoria._id}}">
+                                        {{categoria.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Provedor</label>
+                                <select formControlName="providerId" (change)="changeProvedor($event)"
+                                    class="form-control custom-select">
+                                    <option></option>
+                                    <option *ngFor="let provedor of provedores" value="{{provedor._id}}">
+                                        {{provedor.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Prioridad en el almacen</label>
+                                <select formControlName="levelStock" class="form-control">
+
+                                    <option value="Alto">Alto</option>
+                                    <option value="Bajo">Bajo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Cantidad</label>
+
+                                <input type="number" class="form-control" min="0" pattern="^[0-9]+" formControlName="quantity"
+                                    placeholder="Cantidad">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+
+                    <button type="submit" class="float-right btn btn-success waves-effect waves-light m-r-10"
+                        [disabled]="articuloForm.invalid"> <i class="fa fa-save m-r-10"></i>Guardar</button>
+                    <button [routerLink]="['/dashboard/articulos']" type="button"
+                        class="float-left btn btn-info waves-effect waves-light m-r-10"> <i class="mdi mdi-arrow-left ">
+                        </i> Regresar</button>
+                </form>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+    <div class="row" *ngIf="!mostrar && !imprimirQR">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Modificar imagen del articulo</h4>
+                    <h5 class="card-subtitle">Cargar imagen</h5>
+                    <div class="container-img-articulo text-center">
+                        <img *ngIf="!imgTemp" class="perfilImagen" src="{{urlImg}}{{articulo?.article.img}}">
+                        <img *ngIf="imgTemp" [src]="imgTemp" class="perfilImagen">
+                    </div>
+    
+    
+                    <div class="form-group">
+                        <br>
+                        <label for="exampleInputuname">Seleccionar nueva imagen</label>
+                        <br>
+                        <input type="file" accept=".png, .jpg, .jpeg" (change)="cambiarImagen($event)"
+                            id="exampleInputuname">
+                    </div>
+    
+                    <button type="button" class="btn btn-success btn-block waves-effect waves-light m-r-10"
+                        [disabled]="!imagenSubir" (click)="subirImagen()">
+                        <i class="fa fa-save"></i>
+                        Cambiar imagen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+

@@ -1,0 +1,172 @@
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input [disabled]="mostrarFormBaja" #termino type="text" class="form-control" placeholder="Buscar Baja"
+                (keyup)="buscar(termino.value)"
+              
+              />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn fast" *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card" *ngIf="mostrarFormBaja">
+
+    <div class="card-body">
+        <h3 class="box-title m-t-18">Agregar baja de material</h3>
+        <form [formGroup]="bajaForm" (submit)="registrarBaja()">
+            <div class="row">
+                <div class="col-md-12 " *ngIf="valor">
+                    <div class="form-group">
+                        <label>El articulo seleccionado es {{articuloSeleccionado?.article.name}}</label>
+                    </div>
+                </div>
+                <div class="col-md-12 " *ngIf="!valor">
+                    <div class="form-group">
+                        <label>Articulo</label>
+                        <select formControlName="article" class="form-control custom-select">
+                            <option></option>
+                            <option *ngFor="let articulo of articulos" value="{{articulo._id}}">
+                              Articulo:  {{articulo.name}} Modelo: {{articulo.model}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Descripcion</label>
+                        <input type="text" class="form-control" formControlName="description" placeholder="Descripcion">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Cantidad</label>
+                        <input type="number" min="1" pattern="^[0-9]+" class="form-control" formControlName="quantity"
+                            placeholder="Cantidad">
+                    </div>
+                </div>
+
+            </div>
+            <!--/row-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Proyecto</label>
+                        <select formControlName="project" class="form-control custom-select">
+                            <option></option>
+                            <option *ngFor="let proyecto of proyectos" value="{{proyecto._id}}">
+                                {{proyecto.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="float-right btn btn-success waves-effect waves-light m-r-10"
+                [disabled]="bajaForm.invalid"> <i class="fa fa-save m-r-10"></i>Guardar</button>
+            <button [routerLink]="['/dashboard/salidas','vacio']" type="button"
+                class="float-left btn btn-info waves-effect waves-light m-r-10"> <i class="mdi mdi-arrow-left "> </i>
+                Regresar</button>
+        </form>
+
+    </div>
+</div>
+
+
+<div class="card" *ngIf="!cargando && !mostrarFormBaja">
+    <div class="col-12">
+        <div class="card">
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-8">
+                        <h4 class="card-title">Total de bajas ({{bajas.length}} - {{pagination}})</h4>
+                        <h6 class="card-subtitle">
+                            Bajas realizadas en el almacen
+                        </h6>
+                    </div>
+                    <div class="col">
+                        <div class="text-right">
+                            <button [routerLink]="['/dashboard/salidas','nueva']" class="btn btn-themecolor">
+                                <i class="fa fa-plus-circle"></i>
+                                Agregar baja de material
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="table-responsive">
+                    <table class="table full-color-table full-inverse-table table-striped table-hover ">
+                        <thead>
+                            <tr>
+                                <th class="w100">Articulo</th>
+                                <th class="w180"  >Descripcion</th>
+                                <th class="w100">Proyecto</th>
+
+                               
+                                <th class="w100"> Registro</th>
+                                <th class="w100" >Cantidad</th>
+                                <th class="w100">Fecha de registro</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let baja of bajas">
+                                <td class="w100">
+                                    {{baja.article?.name}}
+                                </td>
+                                <td class="w180">
+                                    {{baja.description}}
+                                </td>
+                                <td class="w100-c">
+                                   <!-- <p *ngFor="let proyecto of baja.project; let i = index">
+                                        Articulo:{{proyecto.name}}
+                                     </p> -->
+
+                                    {{baja?.project?.name}}
+                                </td>
+                                
+                                <td class="w100">
+                                    {{baja.registerUser?.user}}
+                                </td>
+                                <td class="w100">
+                                    {{baja.quantity}}
+                                </td>
+                                <td class="text-nowrap w100">
+                                    {{ formattedDate(baja.created_at) }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div  *ngIf="termino.value.length===0">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anterior</button>
+                    &nbsp;
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

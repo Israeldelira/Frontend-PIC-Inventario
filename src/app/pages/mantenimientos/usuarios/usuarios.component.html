@@ -28,8 +28,8 @@
                     <tr>
                         <th class="w100">Imagen</th>
                         <th>Nombre</th>
-                        <th>Usuario</th>
-                        <th class="w100">Role</th>
+                        <th class="w220">Usuario</th>
+                        <th class="w220">Role</th>
                         <th class="w100">Estatus</th>
                         <th class="w100">Acciones</th>
                       
@@ -43,7 +43,7 @@
                         </td>
                         <td>{{usuario.nombre}}</td>
                         <td>{{usuario.user}}</td>
-                        <td class="w140" >
+                        <td class="w220" >
                             <select class="form-control"
                             [(ngModel)]="usuario.role"
                             (change)="cambiarRole(usuario)">
@@ -52,15 +52,27 @@
 
                             </select></td>
                         <td class="text-nowrap w100">
-                            <a *ngIf="usuario.status" data-toggle="tooltip" data-original-title="Activado"> <i class="fa fa-check text-success m-r-10"></i> </a>
-                            <a *ngIf="!usuario.status" href="#" data-toggle="tooltip" data-original-title="Desactivado"> 
+                            <a *ngIf="usuario.activate" data-toggle="tooltip" data-original-title="Activado"> <i class="fa fa-check text-success m-r-10"></i> </a>
+                            <a *ngIf="!usuario.activate" data-toggle="tooltip" data-original-title="Desactivado" > 
                                 <i class="fa fa-close text-danger"></i></a>
                         </td>
                         <td class="text-nowrap w100">
-                           
-                            <a class="cursor"data-toggle="tooltip" data-original-title="Borrar"
+
+                            <a *ngIf="!usuario.activate" class="cursor"data-toggle="tooltip" data-original-title="Activar"
+                            (click)="activar(usuario)"> 
+                                <i class="mdi mdi-account-plus text-success"></i> </a>
+                               
+                            <a *ngIf="usuario.activate" class="cursor"data-toggle="tooltip" data-original-title="Desctivar"
+                            (click)="desactivar(usuario)"> 
+                                <i class="mdi mdi-account-minus text-danger"></i> </a>
+                                &nbsp;
+                                &nbsp;
+                            <a *ngIf="!usuario.activate" class="cursor"data-toggle="tooltip" data-original-title="Borrar"
                             (click)="eliminarUsuario(usuario)"> 
                                 <i class="fa fa-trash text-danger"></i> </a>
+                                &nbsp;
+                                &nbsp;
+                               
                         </td>
                     </tr>
                 </tbody>

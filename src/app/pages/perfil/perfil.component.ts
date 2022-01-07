@@ -79,11 +79,19 @@ public usuario!: Usuario
       const{nombre,user}=this.perfilForm.value;
       this.usuario.nombre=nombre
       this.usuario.user=user;
-      Swal.fire('Guardado', 'Cambios fueron guardados','success');
+      this.perfilForm.reset();
+      Swal.fire({
+        icon: 'success',
+        title: 'Actualizado',
+        text: 'Se actualizaron los datos de manera correcta',
+        confirmButtonColor: '#3085d6',
+        timer: 3500,
+        confirmButtonText: 'Ok'
+      })
     },(err)=>{
       console.log(err);
       Swal.fire({
-        title: 'Ocurrio un error',
+        title: 'Error',
         text: err.error.msg,
         icon: 'error',
         confirmButtonColor: '#3085d6',
@@ -91,32 +99,55 @@ public usuario!: Usuario
       })
     })
   }
-  cambiarImagen(evt:any):any {
-
-    if(evt?.target?.files[0]){
-      this.imagenSubir = evt?.target?.files[0];
-  
-      if (!evt) {
-        return this.imgTemp = null;
-      }
+  cambiarImagen(event){
+    if(!event.target.files[0]){
+      this.imagenSubir = null;
+      return this.imgTemp = null;
+    } else {
+      const file = event.target.files[0];
+      this.imagenSubir = file;
+ 
       const reader = new FileReader();
-      reader.readAsDataURL(this.imagenSubir);
-  
+      reader.readAsDataURL(file);
+ 
       reader.onloadend = () => {
-        this.imgTemp = reader.result;
+         this.imgTemp = reader.result;
       }
     }
   }
+  // cambiarImagen(evt:any):any {
+
+  //   if(evt?.target?.files[0]){
+  //     this.imagenSubir = evt?.target?.files[0];
+  
+  //     if (!evt) {
+  //       return this.imgTemp = null;
+  //     }
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(this.imagenSubir);
+  
+  //     reader.onloadend = () => {
+  //       this.imgTemp = reader.result;
+  //     }
+  //   }
+  // }
  
   subirImagen() {
  
     this.fileUploadService
       .actualizarFoto( this.imagenSubir, 'users', this.usuario._id || '' )
-      .then( img => {
-        this.usuario.img = img;
-        Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
-      },).catch( err => {
-        console.log("no muestra ningun error"+err);
+      .then( image => {
+        this.usuario.img = image;
+        Swal.fire({
+          icon: 'success',
+          title: 'Actualizado',
+          text: 'Se actualizo la foto de manera correcta',
+          confirmButtonColor: '#3085d6',
+          timer: 3500,
+          confirmButtonText: 'Ok'
+        })
+      }).catch( error => {
+        console.log("no muestra ningun error"+error);
      
         Swal.fire('Error', 'No se pudo subir la imagen', 'error');
       })

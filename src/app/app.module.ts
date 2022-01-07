@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -15,13 +16,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AppComponent,
     
     NotFoundComponent,
+       
+         
          
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PagesModule,
-    AuthModule
+    AuthModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

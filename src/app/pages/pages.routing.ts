@@ -1,36 +1,26 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from '../guards/admin.guard';
 import { AuthGuard } from '../guards/auth.guard';
-import { Usuario } from '../models/usuario.model';
-import { AccountSettingsComponent } from './account-settings/account-settings.component';
-import { ArticulosComponent } from './articulos/articulos.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { Grafica1Component } from './grafica1/grafica1.component';
-import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 import { PagesComponent } from './pages.component';
-import { PerfilComponent } from './perfil/perfil.component';
-import { ProyectosComponent } from './proyectos/proyectos.component';
 
 const routes: Routes = [
     {
         path: 'dashboard', 
         component: PagesComponent,
         canActivate:[AuthGuard],
-        children: [
-            {path:'',component:DashboardComponent,data:{titulo:'Dashboard'}},
-            { path: 'articulos', component: ArticulosComponent,data:{titulo:'Articulos'} },
-            { path: 'proyectos', component: ProyectosComponent ,data:{titulo:'Proyectos'} },
-            { path: 'graficas', component: Grafica1Component ,data:{titulo:'Graficas'} },
-            { path: 'account-settings', component: AccountSettingsComponent,data:{titulo:'Configuracion de cuenta'} },
-            { path: 'perfil', component: PerfilComponent,data:{titulo:'Perfil'} },
-            //Mantenimientos de usuario
-            {path:'usuarios', component:UsuariosComponent,data:{titulo:'Usuarios de la aplicacion'}}     
-        ]
+        canLoad:[AuthGuard],
+        loadChildren:()=>import('./child-routes.module').then(m=>m.ChildRoutesModule)
     },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
+    imports: [RouterModule.forChild(routes),
+        FormsModule,CommonModule,
+        BrowserModule],
     exports: [RouterModule]
 })
 export class PagesRoutingModule { }

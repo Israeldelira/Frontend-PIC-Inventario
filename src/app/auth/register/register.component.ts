@@ -51,10 +51,19 @@ export class RegisterComponent {
     }
     this.usuarioService.crearUsuario(this.registerForm.value)
       .subscribe(resp => {
-      this.router.navigateByUrl('/');
+        Swal.fire({
+        
+          icon: 'success',
+          title: 'Usuario registrado',
+          text: 'Inicia sesion',
+          confirmButtonColor: '#3085d6',
+          timer: 3500,
+          confirmButtonText: 'Ok'
+        })
+      this.router.navigateByUrl('/login');
       }, (err) => {
         Swal.fire({
-          title: 'Ocurrio un error',
+          title: 'Error',
           text: err.error.msg,
           icon: 'error',
           confirmButtonColor: '#3085d6',

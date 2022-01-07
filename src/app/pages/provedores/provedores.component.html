@@ -1,0 +1,92 @@
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+<div class="card-body">
+    <input type="text" class="form-control" placeholder="Buscar provedor"
+    (keyup)="buscar(termino.value)"
+    #termino />
+</div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn fast" *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+    </div>
+</div>
+
+
+
+<div  class="card" *ngIf="!cargando" >
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="card-title">Total de provedores ({{provedores.length}}- {{pagination}})</h4>
+                       
+                    </div>
+                    <div class="col">
+                        <div class="text-right">
+                            <button [routerLink]="['/dashboard/provedor','nuevo']" class="btn btn-themecolor">
+                                <i class="fa fa-plus-circle"></i>
+                                Agregar provedor
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="table-responsive">
+                    <table class="table full-color-table full-inverse-table table-striped table-hover ">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Telefono</th>
+                                <th>Registro</th>
+                                <th>Direccion</th>
+                                <th class="w100">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let provedor of provedores">
+                                <td class="w180" >
+                                    {{provedor.name}}</td>
+                            <td class="w180" >{{provedor.phone}}</td>
+                                     
+                                    <td class="w100-c">
+                                        {{provedor.registerUser?.user}}</td>
+
+                                        <td class="text-nowrap w100">
+                                            {{provedor.address}}
+                                        </td>
+                                <td class="text-nowrap w100">
+                                    <a  [routerLink]="['/dashboard/provedor',provedor._id]" class="cursor" data-toggle="tooltip" data-original-title="Editar"> 
+                                        <i class="fa fa-pencil  text-info"></i> </a>
+                                        &nbsp;
+                                        &nbsp;
+                                    <a (click)="eliminarProvedor(provedor);" class="cursor" data-toggle="tooltip" data-original-title="Borrar"> 
+                                        <i class="fa fa-trash text-danger"></i> </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <div  *ngIf="termino.value.length===0">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anterior</button>
+                    &nbsp;
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+    
+</div>
+

@@ -9,12 +9,12 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuarios',
-  templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css']
+  templateUrl: './usuarios.component.html'
+
 })
 export class UsuariosComponent implements OnInit, OnDestroy {
   public totalUsuarios: number = 0;
-  public usuarios: Usuario[] = [];
+  public usuarios: Usuario[]=[]
   public usuariosTemp: Usuario[] = [];
   public pagination: number = 0;
   public cargando: boolean = true;
@@ -62,7 +62,7 @@ this.cargarUsuarios());
 
   buscar(termino: string) {
     if (termino.length === 0) {
-      console.log("estos son los usuarios"+this.usuarios)
+    
       return this.usuarios = this.usuariosTemp;
     }
     this.busquedaService.buscar('users', termino)
@@ -82,7 +82,6 @@ this.cargarUsuarios());
         confirmButtonText: 'Ok'
       })
     }
-    console.log('esto no se puede ver');
     Swal.fire({
       title: '¿Deseas eliminar al usuario?',
       text: `Eliminar usuario: ${usuario.user} `,
@@ -111,6 +110,86 @@ this.cargarUsuarios());
       }
     })
   }
+  activar(usuario:Usuario){
+    console.log(this.usuarioService.id)
+    if(usuario._id===this.usuarioService.id){
+      return  Swal.fire({
+        title: 'Error',
+        text: `Ya estas activado`,
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok'
+      })
+    }
+    Swal.fire({
+      title: 'Activar usuario',
+      text: `¿Deseas activar el usuario: ${usuario.user} ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#C8CBCA',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        usuario.activate=true
+        this.usuarioService.guardarActualizacionUsuario(usuario).subscribe(
+          resp=>  {
+            this.cargarUsuarios();
+            Swal.fire({
+              title: 'Activado',
+              text: `El usuario ${usuario.user} se activo de manera correcta`,
+              icon: 'success',
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Ok'
+            })
+          }
+        )
+      
+      }
+    })
+  }
+
+  desactivar(usuario:Usuario){
+    console.log(this.usuarioService.id)
+    if(usuario._id===this.usuarioService.id){
+      return  Swal.fire({
+        title: 'Error',
+        text: `No puedes desactivar tu propio usuario`,
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok'
+      })
+    }
+    Swal.fire({
+      title: 'Desactivar usuario',
+      text: `¿Deseas desactivar el usuario: ${usuario.user} ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#C8CBCA',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        usuario.activate=false
+        this.usuarioService.guardarActualizacionUsuario(usuario).subscribe(
+          resp=>  {
+            this.cargarUsuarios();
+            Swal.fire({
+              title: 'Desctivado',
+              text: `El usuario ${usuario.user} se activo de manera correcta`,
+              icon: 'success',
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Ok'
+            })
+          }
+        )
+      
+      }
+    })
+  }
+
   cambiarRole(usuario:Usuario){
     this.usuarioService.guardarActualizacionUsuario(usuario)
     .subscribe(resp=>{

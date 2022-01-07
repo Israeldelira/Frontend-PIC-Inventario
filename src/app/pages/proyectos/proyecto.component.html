@@ -1,0 +1,152 @@
+
+<div class="card" *ngIf="mostrar">
+    <div class="card-body">
+        <h4 class="card-title">Agrega un nuevo proyecto</h4>
+        <h6 class="card-subtitle"> Ingresa los datos del nuevo proyecto </h6>
+       
+        <form class="form" [formGroup]="proyectosForm" autocomplete="=off"
+        (submit)="registrarProyecto()">
+            <div class="form-group m-t-25 row">
+                <div class="col-md-3">
+                    <label for="example-text-input" class="col-form-label">Ingresa el nombre</label>
+
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control" type="text" placeholder="Nombre" 
+                    id="example-text-input"
+                    formControlName="name">
+                </div>
+                <!-- <div class="row">
+                    <div class=" col text-danger">
+                        <p *ngIf="campoNoValido('name')">El nombre es requerido</p>
+                        <p></p>
+                    </div>
+                </div> -->
+            </div>
+            <div class="form-group m-t-20 row">
+                <div class="col-md-3">
+                    <label for="example-text-input" class="col-form-label">Ingresa el cliente</label>
+
+                </div>
+                <div class="col-9">
+                    <input class="form-control" type="text" placeholder="Cliente" 
+                    id="example-text-input"
+                    formControlName="client">
+                </div>
+                <!-- <div class="row">
+                    <div class=" col text-danger">
+                        <p *ngIf="campoNoValido('client')">El cliente es requerido</p>
+                        <p></p>
+                    </div>
+                </div> -->
+            </div>
+            <div class="form-group m-t-20 row">
+                <div class="col-md-3">
+                    <label for="example-text-input" class=" col-form-label">Ingresa el encargado del proyecto</label>
+
+                </div>
+                <div class="col-9">
+                    <select formControlName="manager" class="form-control custom-select">
+                        <option></option>
+                        <option *ngFor="let usuario of usuarios"
+                        value="{{usuario.nombre}}">
+                            {{usuario.nombre}}
+                          </option>
+                    </select>
+               
+                </div>
+                
+                <!-- <div class=" col text-danger">
+                    <p *ngIf="campoNoValido('manager')">El encargado es requerido</p>
+                    <p></p>
+                </div> -->
+            </div>
+            
+          
+            <button [routerLink]="['/dashboard/proyectos']" type="button" class="float-left btn btn-info waves-effect waves-light m-r-15"> <i class="mdi mdi-arrow-left "> </i> Regresar </button>
+            <button [disabled]="proyectosForm.invalid" type="submit" class="float-right btn btn-success waves-effect waves-light m-r-10"> <i class="fa fa-save m-r-10"></i>Guardar</button>
+
+
+          
+        </form>
+    </div>
+</div>
+<div class="row" *ngIf="!mostrar">
+    <div class="col-6">
+        <div class="card" >
+           
+            <div class="card-body">
+                   <h3 class="card-title">Proyecto seleccionado</h3>
+                <p class="text-muted m-b-10 font-13">Nombre</p>
+                 <h5> {{ proyecto?.project.name}}</h5> 
+                <br>
+                <p class="text-muted m-b-10 font-13"> Cliente</p>
+                    <h5> {{ proyecto?.project.client}}</h5> 
+               
+                <br>
+                <p class="text-muted m-b-10 font-13">Registro</p>
+                <h5> {{ proyecto?.project.manager}}</h5> 
+               <br>
+               <p class="text-muted m-b-10 font-13">Estatus del proyecto</p>
+               <span *ngIf="proyecto?.project.complete" class="label label-success">Completado</span>
+               <span *ngIf="!proyecto?.project.complete" class="label label-inverse">No completado</span>
+               <br>
+              <br>
+                <p class="text-muted m-b-10 font-13">Registrado por</p>
+                <h5>{{ proyecto?.project.registerUser?.user }}</h5> 
+                <br>
+                <br>
+               
+            </div>
+        </div>
+    </div>
+    <div
+    class="col-6">
+    <div class="card card-body">
+        <h3 class="box-title m-b-0">Modificar proyecto existente</h3>
+        <p class="text-muted m-b-30 font-13">Formulario</p>
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <form
+                [formGroup]="proyectosForm"
+                        (submit)="actualizarProyecto()">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre</label>
+                        <input formControlName="name" type="text" class="form-control" id="exampleInputName" placeholder="Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Cliente</label>
+                        <input formControlName="client"  type="text" class="form-control" id="exampleInputName" placeholder="Cliente">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Encargado</label>
+                        <select formControlName="manager" class="form-control custom-select">
+                            <option></option>
+                            <option *ngFor="let usuario of usuarios"
+                            value="{{usuario.nombre}}">
+                                {{usuario.nombre}}
+                              </option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Estatus del proyecto</label>
+                        <select formControlName="complete" class="form-control custom-select">
+                            <option></option>
+                            <option  value="false">Incompleto</option>
+                            <option  value="true">Completo</option>
+               
+                            
+                        </select>
+                   
+                    </div>
+                   
+                       
+                
+                    <button [disabled]="proyectosForm.invalid" type="submit" class="float-right btn btn-success waves-effect waves-light m-r-10"> <i class="fa fa-save m-r-10"></i>Guardar</button>
+                    <button [routerLink]="['/dashboard/proyectos']" type="button" class="float-left btn btn-info waves-effect waves-light m-r-10"> <i class="mdi mdi-arrow-left "> </i>   Regresar</button>
+                </form>
+            </div>
+        </div>
+    </div></div>
+</div>
+

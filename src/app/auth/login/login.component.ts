@@ -53,7 +53,7 @@ public formSubmitted=false
     },
       (err)=>{
         Swal.fire({
-          title: 'Ocurrio un error',
+          title: 'Error',
           text: err.error.msg,
           icon: 'error',
           confirmButtonColor: '#3085d6',
