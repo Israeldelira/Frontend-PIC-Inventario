@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Response } from 'aws-sdk';
 import { Proyecto } from 'src/app/models/proyecto.models';
 import { Usuario } from 'src/app/models/usuario.model';
 import { BusquedaService } from 'src/app/services/busqueda.service';
