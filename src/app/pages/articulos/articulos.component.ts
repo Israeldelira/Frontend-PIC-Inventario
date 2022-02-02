@@ -5,6 +5,7 @@ import { Articulo } from 'src/app/models/articulos.model';
 import { ArticuloService } from 'src/app/services/articulo.service';
 import { BusquedaService } from 'src/app/services/busqueda.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,7 +21,8 @@ export class ArticulosComponent implements OnInit {
   //IP CASA
   // public urlImg: string="http://192.168.1.88:3000/api/upload/articles/"
 //IP TRABAJO
-public urlImg: string="http://192.168.3.22:3000/api/upload/articles/"
+public urlImg=environment.base_url+'/upload/articles/';
+// public urlImg: string="http://192.168.3.22:3000/api/upload/articles/"
   constructor(
     private articulosServices:ArticuloService,
     private busquedaService:BusquedaService,

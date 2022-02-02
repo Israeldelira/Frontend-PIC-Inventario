@@ -1,3 +1,7 @@
+
+#  Cambio IP de backend
+La ip de enviroments.ts debe de ser remplazada por la ip donde se corre el backend
+para lograr que las peticiones se realicen de manera correcta
 # FrontEndInventario
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.4.

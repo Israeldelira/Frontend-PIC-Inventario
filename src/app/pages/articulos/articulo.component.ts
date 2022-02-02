@@ -9,6 +9,7 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 import { ProvedorService } from 'src/app/services/provedor.service';
 import Swal from 'sweetalert2';
 import { FileUploadService } from 'src/app/services/file-upload.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -28,7 +29,9 @@ export class ArticuloComponent implements OnInit {
   responses$: Observable<any>;
   articulo = null;
   public imprimirQR: boolean = false;
-  public urlImg: string = "http://192.168.3.22:3000/api/upload/articles/"
+  public urlImg=environment.base_url+'/upload/articles/';
+
+  // public urlImg: string = "http://192.168.3.22:3000/api/upload/articles/"
 
   fileName = '';
 
